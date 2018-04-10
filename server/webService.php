@@ -13,8 +13,7 @@ function getProducto($producto='')
     if( array_key_exists($producto, $productos))
     {
         // return $producto . " cuesta " . $productos[$producto] . " $";
-        $producto . " cuesta " . $productos[$producto] . " $";
-        echo json_encode($producto);
+        echo $producto . " cuesta " . $productos[$producto] . " $";
     }
     else
     {
