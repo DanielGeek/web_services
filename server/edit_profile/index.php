@@ -4,7 +4,13 @@
 
 //index.php
 
-include('../db/database_connection.php');
+// include('../db/database_connection.php');
+include('../db/modelUsuario.php');
+
+$login = new modelUsuario();
+
+//inicio una session
+// $login->getSessionStart();
 
 // echo $_SESSION['type'];
 // echo $_SESSION['id'];
@@ -103,7 +109,14 @@ if(!isset($_SESSION["type"]))
             <li class=''>
               <a href='campana/'><i class="fa fa-dashboard"></i>IVR Cognitivo</a>
               <ul>
+              <?php
+              if($_SESSION['type'] == 'master')
+              {
+              ?>
                 <li><a href='campana/#collapseVerCampana'>Ver Campañas</a></li>
+              <?php
+              }
+              ?>
                 <li><a href='campana/#collapseCrearCampana'>Crear Campaña</a></li>
                 <li><a href='campana/#collapseVariables'>Variables</a></li>
               </ul>

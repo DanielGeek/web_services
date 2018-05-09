@@ -134,8 +134,15 @@
               <li class=''>
                 <a href='campana/'><i class="fa fa-dashboard"></i>IVR Cognitivo</a>
                 <ul>
-                  
+                  <?php
+                  if($_SESSION['type'] == 'master')
+                  {
+                  ?>
                   <li><a href='campana/#collapseVerCampana'>Ver Campañas</a></li>
+                  <?php
+                  }
+                  ?>
+                  
                   <li><a href='campana/#collapseCrearCampana'>Crear Campaña</a></li>
                   <li><a href='campana/#collapseVariables'>Variables</a></li>
                  

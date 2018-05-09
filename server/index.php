@@ -4,7 +4,10 @@
 
 //index.php
 
-include('db/database_connection.php');
+// include('db/database_connection.php');
+include('db/modelUsuario.php');
+
+$login = new modelUsuario();
 
 // echo $_SESSION['type'];
 // echo $_SESSION['id'];

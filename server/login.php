@@ -1,69 +1,4 @@
-<?php
 
-include('db/database_connection.php');
-$message = '';
-// echo $_SESSION['type'];
-
-if(isset($_SESSION['type']))
-{
-  header('location:index.php');
-}
-$message = '';
-if(isset($_POST["login"]))
-{
-                $query = "
-            SELECT * FROM usuario 
-            WHERE correo_name = :userName
-            ";
-            $statement = $connect->prepare($query);
-            $statement->execute(
-            array(
-                'userName' => $_POST["userName"]
-            )
-            );
-            $count = $statement->rowCount();
-            if($count > 0)
-            {
-            $result = $statement->fetchAll();
-            foreach($result as $row)
-            {
-            if(password_verify($_POST["Password1"], $row["user_password"]))
-            {
-                if($row['user_status'] == 'Active')
-                {
-                $_SESSION['type'] = $row['user_type'];
-                $_SESSION['id'] = $row['id'];
-                $_SESSION['user_name'] = $row['user_name'];
-                header("location:index.php");
-                }
-                else
-                {
-
-                    $message = '<script>$("#view").html("<strong>Cuenta desativada, contacta con el administrador!</strong>").show(300).delay(3000).hide(1000); $("#view").addClass("alert alert-danger text-center");</script>';
-                    
-                }
-            }
-            else
-            {
-             
-                $message = '<script>$("#view").html("<strong>Contraseña incorrecta</strong>").show(300).delay(3000).hide(1000); $("#view").addClass("alert alert-danger text-center");</script>';
-                
-            }
-        }
-    }
-    else
-    {
-        $message = '<script>$("#view").html("<strong>No se encontro el usuario</strong>").show(3000).delay(3000).hide(1000); $("#view").addClass("alert alert-danger text-center");</script>';
-         
-    }
-}
-// else
-// {
-//   $message = "<div class='alert alert-info text-center'><label>Ingrese los datos</label></div>";
-    
-// }
-
-?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -132,11 +67,12 @@ if(isset($_POST["login"]))
                 </div>
                 <div class="actions">
                   <input class="btn btn-danger" id="login" name="login" type="submit" value="Entrar">
+                  <input type="hidden" name="login">
                   <a class="link" href="#">Olvido la contraseña?</a>
                   <div class="clearfix"></div>
                 </div>
                 <div id="show">
-                  <div id="view" ><?php  echo $message  ?></div>
+                  <div id="view" ></div>
                 </div>
                 <!-- <div id="loading-image" class="text-center loading-image">
                   <img id="git-image" class="git-image" src="https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif" alt="Sending....." />
@@ -146,9 +82,6 @@ if(isset($_POST["login"]))
             </div>
              <!-- inicio Mensaje oculto para errores  -->
           
-             
-            
-            
           <!-- inicio Mensaje oculto para errores  -->
           </div>
         
@@ -161,6 +94,7 @@ if(isset($_POST["login"]))
    
     <script src="js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/controllers/controllerLogin/controllerLogin.js"></script>
+    
   </body>
 </html>

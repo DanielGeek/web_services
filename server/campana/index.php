@@ -1,7 +1,10 @@
 <?php
     //index.php
 
-include('../db/database_connection.php');
+// include('../db/database_connection.php');
+include('../db/modelUsuario.php');
+
+$login = new modelUsuario();
 
 // echo $_SESSION['type'];
 // echo $_SESSION['id'];
@@ -76,6 +79,7 @@ if(!isset($_SESSION["type"]))
     <base href="../">
     <link rel="shortcut icon" href="img/favicon.ico">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <link href="css/new.css" rel="stylesheet">
@@ -83,6 +87,8 @@ if(!isset($_SESSION["type"]))
 
     <link href="fonts/font-awesome.min.css" rel="stylesheet">
 
+    <!-- Data Tables -->
+    <link rel="stylesheet" href="css/datatables/dataTables.bs.min.css">
     <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -149,8 +155,14 @@ if(!isset($_SESSION["type"]))
               <li class='active'>
                 <a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana"><i class="fa fa-dashboard"></i>IVR Cognitivo</a>
                 <ul>
-                  
+                  <?php
+                  if($_SESSION['type'] == 'master')
+                  {
+                  ?>
                   <li><a href='#collapseVerCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVerCampana">Ver Campañas</a></li>
+                  <?php
+                  }
+                  ?>
                   <li><a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana">Crear Campaña</a></li>
                   <li><a href='#collapseVariables' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVariables">Variables</a></li>
                  
@@ -172,12 +184,19 @@ if(!isset($_SESSION["type"]))
           <div class="sub-nav hidden-sm hidden-xs">
             <ul>
               <li><a href="#collapseCrearCampana" data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana" class="heading">IVR Congnitivo</a></li>
-              
+              <?php
+              if($_SESSION['type'] == 'master')
+              {
+              ?>
               <li class="hidden-sm hidden-xs">
                 <a href='#collapseVerCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVerCampana">Ver Campañas</a>
               </li>
+              <?php
+              }
+              ?>
               <li class="hidden-sm hidden-xs">
-                <a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana" class="selected">Crear Campaña</a>
+                <a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana">Crear Campaña</a>
+                <!-- poner esta clase en el elemto a para activar la seleccion class="selected" -->
               </li>
               <li class="hidden-sm hidden-xs">
                 <a href='#collapseVariables' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVariables">Variables</a>
@@ -193,7 +212,7 @@ if(!isset($_SESSION["type"]))
 
           <!-- Dashboard Wrapper Start -->
           <div class="dashboard-wrapper">
-            <!-- Row Start -->
+            <!-- Row Start CrearCampana -->
             <div id="collapseCrearCampana" class="row gutter collapse in" aria-labelledby="collapseCrearCampana" data-parent="#accordion">
               <div class="col-lg-12 col-md-12">
                 <div class="widget no-margin">
@@ -214,15 +233,20 @@ if(!isset($_SESSION["type"]))
                 </div>
               </div>
             </div>
-            <!-- Row Start -->
+            <!-- Row End CrearCampana -->
             <br>
-            <!-- Row Start correo -->
-            <!-- <div id="collapseTwo" class="row gutter collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            
+            <!-- Row Start Ver Campana -->
+            <?php
+            if($_SESSION['type'] == 'master')
+            {
+            ?>
+            <div id="collapseVerCampana" class="row gutter collapse in" aria-labelledby="collapseVerCampana" data-parent="#accordion">
               <div class="col-lg-12 col-md-12">
                 <div class="widget no-margin">
                   <div class="widget-header">
                     <div class="title">
-                      Enviar Correo
+                      Ver Campañas
                     </div>
                     <span class="tools">
                       <i class="fa fa-cogs"></i>
@@ -230,13 +254,17 @@ if(!isset($_SESSION["type"]))
                   </div>
                   <div class="widget-body">
                     <div class="row gutter">
-                      <?php //include "correo/insertcorreo.php"; ?>
+                      <?php include "crud_campana.php"; ?>
                     </div>
                   </div>
                 </div>
               </div>
-            </div> -->
-            <!-- Row End -->
+            </div>
+            <?php
+            }
+            ?>
+            <!-- Row End Ver Campana -->
+            
           </div>
           <!-- Dashboard Wrapper End -->
       </div>
@@ -282,6 +310,11 @@ if(!isset($_SESSION["type"]))
     </script>
     <!--jQuery validate para validar formulario en el front-end-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
-    <!-- <script src="correo_webservice/js/insertCorreo.js" type="text/javascript"></script> -->
+
+    <!-- Data Tables -->
+		<script src="js/datatables/dataTables.min.js"></script>
+		<script src="js/datatables/dataTables.bootstrap.min.js"></script>
+
+    <script src="js/controllers/controllerCampana/controllerCampana.js" type="text/javascript"></script>
   </body>
 </html>

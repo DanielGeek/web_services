@@ -1,7 +1,10 @@
 <!-- Row Start -->
 
           <!-- inicio form correo -->
+
           <div id="producto_contenedor" class=" col-md-12 col-lg-12 card">
+            <div id="result" class="text-center"></div>
+            <br>
                     <!-- <div class="card-header" id="headingTwo">
                         <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -13,30 +16,30 @@
                     
                     <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion"> -->
                         <div class="card-body">
-                            <form id="form_campana" method="post">
+                            <form id="form_campana" method="post" enctype="multipart/form-data">
                                 <div id="box-correo">
                                     <div class="form-group">
-                                        <label for="campana">Nombre campaña:</label>
-                                        <input type="text" class="form-control" placeholder="Nombre campaña: " name="campana" required/>
+                                        <label for="campana_name">Nombre campaña:</label>
+                                        <input type="text" class="form-control" placeholder="Nombre campaña: " name="campana_name" id="campana_name" required/>
                                     </div>
                                     
                                     <div class="form-group">
-                                    <label class="btn btn-default btn-file btn-block">
-                                        Subir base <input type="file" nama="file-crear-campana" style="display: none;">
+                                    <label class="btn btn-info btn-file btn-block">
+                                        Subir base <input type="file" name="file_crear_campana" id="file_crear_campana" style="" required/>
                                     </label>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="saludo">Saludo:</label>
-                                        <input type="text" class="form-control" placeholder="Saludo: " name="saludo" required/>
+                                        <div class="alert alert-info text-center"><?php echo 'Saludo, Soy la Ejecutiva Virtual , Hablo con '.$_SESSION['user_name']; ?></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="despedida">Despedida:</label>
-                                        <input type="text" class="form-control" placeholder="Despedida: " name="despedida" required/>
+                                        <div class="alert alert-info text-center">Adios</div>
                                     </div>
                                     <div class="form-group">
                                         <label for="descargar">Descargar archivo ejemplo:</label>
-                                        <a href=""><button class="btn btn-default" type="submit" name="button" id="btn_submit">
+                                        <a href="lib/ArchivoEjemplo.xlsx" target="_blank" class="btn btn-success btn-block">
                                             <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                                        </button></a>
                                        
@@ -52,9 +55,7 @@
                                 <img id="git-image" class="git-image" src="https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif" alt="Sending....." />
                             </div> -->
                         </div>
-                        <div id="correo_show">
-                            <div id="view-correo"></div>
-                        </div>
+                            
                     <!-- </div>                 -->
                 </div>
                  <!-- fin form correo -->
