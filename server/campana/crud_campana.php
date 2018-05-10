@@ -80,6 +80,7 @@
                             
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" name="campana_name_oculto" id="campana_name_oculto" />
                             <input type="hidden" name="user_id2" id="user_id2" />
                             <input type="hidden" name="btn_action2" id="btn_action2" />
                             <input type="submit" name="action2" id="action2" class="btn btn-info" value="Add" />

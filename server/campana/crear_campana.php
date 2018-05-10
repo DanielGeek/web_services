@@ -30,8 +30,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="saludo">Saludo:</label>
-                                        <div class="alert alert-info text-center"><?php echo 'Saludo, Soy la Ejecutiva Virtual , Hablo con '.$_SESSION['user_name']; ?></div>
+                                        <!-- <label for="saludo">Saludo:</label> -->
+                                        <div id="saludo"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="despedida">Despedida:</label>
@@ -48,12 +48,14 @@
                                     <button class="btn btn-info btn-block" type="submit" name="button" id="btn_submit">
                                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i> CREAR
                                     </button>
+                                    
                                 </div>
                             </form>
+                            <!-- <br>
+                            <button class="btn btn-info btn-block" name="hablar" id="hablar">
+                                 <i class="fa fa-plus" aria-hidden="true"></i> Mostrar nombres
+                            </button> -->
                             
-                            <!-- <div id="loading-correo-image" class="text-center loading-correo-image">
-                                <img id="git-image" class="git-image" src="https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif" alt="Sending....." />
-                            </div> -->
                         </div>
                             
                     <!-- </div>                 -->

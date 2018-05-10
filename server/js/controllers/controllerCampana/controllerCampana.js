@@ -61,14 +61,16 @@ $(document).ready(function(){
               contentType:false,  
               processData:false,  
               success:function(data){  
-                  $('#result').html(data).show(2000).delay(3000).hide(5000);
+                //   $('#result').html(data).show(2000).delay(3000).hide(5000);
+                  $('#result').html(data);
+                  
                   $('#file_crear_campana').val('');
                   $('#btn_submit').attr('disabled', false);
                   userdataTable.ajax.reload();
               }
         });
     });
-    
+
     //muestra tabla con los datos de las campañas para el master
     var userdataTable = $('#user_data2').DataTable({
       "processing": true,
@@ -130,7 +132,8 @@ $(document).ready(function(){
           success:function(data)
           {
             //retorno la data en json, muestro el modal y los datos json en los inputs para editarlos
-            $('#userModal2').modal('show');	
+            $('#userModal2').modal('show');
+            $('#campana_name_oculto').val(data.campana_name_oculto);
             $('#campana_name2').val(data.campana_name2);
             $('#rut').val(data.rut);
             $('#user_name2').val(data.user_name2);

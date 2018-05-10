@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-05-2018 a las 06:28:11
+-- Tiempo de generación: 10-05-2018 a las 06:36:16
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.0.25
 
@@ -25,63 +25,59 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `campana`
+-- Estructura de tabla para la tabla `IVRC_campana`
 --
 
-CREATE TABLE `campana` (
+CREATE TABLE `IVRC_campana` (
+  `id` int(11) NOT NULL,
+  `campana_name` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `IVRC_campana`
+--
+
+INSERT INTO `IVRC_campana` (`id`, `campana_name`) VALUES
+(1, 'prueba nocturna 2'),
+(10, 'campaña media noche 2'),
+(11, 'Campa 5 Mar 8 mayo 2018'),
+(12, 'Campa 5 Mar 8 mayo 2018'),
+(13, 'campaña media noche 3'),
+(14, 'campana daniel tipo user normal'),
+(15, 'campaña media noche 3 editada');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `IVRC_campana_data`
+--
+
+CREATE TABLE `IVRC_campana_data` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `rut` int(11) NOT NULL,
   `user_name` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `user_telefono` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `user_deuda` decimal(10,0) NOT NULL,
-  `campana_name` varchar(255) COLLATE utf8_spanish_ci NOT NULL
+  `id_campana` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `campana`
+-- Volcado de datos para la tabla `IVRC_campana_data`
 --
 
-INSERT INTO `campana` (`id`, `id_user`, `rut`, `user_name`, `user_telefono`, `user_deuda`, `campana_name`) VALUES
-(1, 1, 15434708, 'Luis Ponce', '946922776', '200000', 'Campaña Lunes'),
-(2, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'prueba 3'),
-(5, 11, 15434708, 'Luis Ponce', '946922776', '200000', 'prueba admin'),
-(6, 11, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'prueba admin'),
-(9, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana noctura 2'),
-(10, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana noctura 2'),
-(11, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana nueva 3'),
-(13, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana viernes 4'),
-(14, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana viernes 4'),
-(15, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana viernes 4'),
-(16, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana viernes 4'),
-(17, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana viernes 5'),
-(18, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana viernes 5'),
-(19, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana viernes 4'),
-(20, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana viernes 4'),
-(21, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana viernes 4'),
-(22, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana viernes 4'),
-(23, 3, 15434708, 'Luis Ponce', '946922776', '200000', '123'),
-(24, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', '123'),
-(25, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana Lun 7'),
-(26, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana Lun 7'),
-(27, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana 2 Lun 7'),
-(28, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana 2 Lun 7'),
-(29, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana 3 Lunes 7'),
-(30, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana 3 Lunes 7'),
-(31, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana 4 Lunes 7'),
-(32, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana 4 Lunes 7'),
-(33, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana 5 Lunes 7'),
-(34, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana 5 Lunes 7'),
-(35, 1, 15434708, 'Luis Ponce', '946922776', '200000', 'campana 6 Lunes 7'),
-(36, 1, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana 6 Lunes 7'),
-(37, 1, 15434708, 'Luis Ponce', '946922776', '200000', 'campana 7 Lunes 7'),
-(38, 1, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana 7 Lunes 7'),
-(39, 3, 15434708, 'Luis Ponce', '946922776', '200000', 'campana 8 Lunes 7'),
-(40, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana 8 Lunes 7'),
-(66, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana Martes'),
-(67, 4, 15434708, 'Luis Ponce', '946922776', '200000', 'campana Jueves '),
-(68, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 'campana master '),
-(69, 20, 2012121212, 'Master usuario', '12312312', '4005021', 'campana admin');
+INSERT INTO `IVRC_campana_data` (`id`, `id_user`, `rut`, `user_name`, `user_telefono`, `user_deuda`, `id_campana`) VALUES
+(159, 1, 15434708, 'Luis Ponce', '946922776', '200000', 1),
+(160, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 1),
+(164, 3, 15434708, 'Luis Ponce', '946922776', '200000', 10),
+(165, 1, 16693834, 'Joselin Rodriguez', '965618955', '150000', 10),
+(167, 1, 20147586, 'Daniel Barreto 3', '+50 04246504181', '4005021', 12),
+(168, 3, 15434708, 'Luis Ponce', '946922776', '200000', 13),
+(169, 3, 16693834, 'Joselin Rodriguez', '965618955', '150000', 13),
+(170, 1, 15434708, 'Luis Ponce', '946922776', '200000', 14),
+(171, 1, 16693834, 'Joselin Rodriguez', '965618955', '150000', 14),
+(172, 3, 15434708, 'Luis Ponce', '946922776', '200000', 15),
+(173, 4, 16693834, 'Joselin Rodriguez', '965618955', '150000', 15);
 
 -- --------------------------------------------------------
 
@@ -117,9 +113,15 @@ INSERT INTO `usuario` (`id`, `correo_name`, `user_password`, `user_name`, `user_
 --
 
 --
--- Indices de la tabla `campana`
+-- Indices de la tabla `IVRC_campana`
 --
-ALTER TABLE `campana`
+ALTER TABLE `IVRC_campana`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `IVRC_campana_data`
+--
+ALTER TABLE `IVRC_campana_data`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -133,10 +135,16 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `campana`
+-- AUTO_INCREMENT de la tabla `IVRC_campana`
 --
-ALTER TABLE `campana`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+ALTER TABLE `IVRC_campana`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `IVRC_campana_data`
+--
+ALTER TABLE `IVRC_campana_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
