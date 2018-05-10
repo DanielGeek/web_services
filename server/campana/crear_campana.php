@@ -5,6 +5,9 @@
           <div id="producto_contenedor" class=" col-md-12 col-lg-12 card">
             <div id="result" class="text-center"></div>
             <br>
+            <div id="ivr_arbol">
+            
+            </div>
                     <!-- <div class="card-header" id="headingTwo">
                         <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">

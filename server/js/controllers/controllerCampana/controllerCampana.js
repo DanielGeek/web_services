@@ -50,6 +50,7 @@ $(document).ready(function(){
         });
   }
 
+
     //crear una campaña como user o master
     $('#form_campana').on('submit', function(event){
         event.preventDefault();  

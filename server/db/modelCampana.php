@@ -12,6 +12,7 @@ class modelCampana {
        $this->db=Conectar::conexion();
        $this->session = session_start();
     }
+
     // metodo para obtener todos los id del creador de la campaña
     public function getIdCreador()
     {
