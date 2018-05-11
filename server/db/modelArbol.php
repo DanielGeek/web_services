@@ -28,7 +28,6 @@ class modelArbol {
                             <table class='table table-bordered'>  
                                 <tr>  
                                     <th>Id</th>
-                                    <th>Id_sub</th>  
                                 </tr>  
                                 "; 
         $consulta = $this->db->query($query);
@@ -47,28 +46,29 @@ class modelArbol {
                     $idmenor[] = $row['id'];
                 }
             }
-
+            
+            
             for($i = 0; $i < count($idmenor); $i++)
             {
-                if(count($idmenor) < 2)
+                // para solo almacenar los 2 primeros id
+                if($idmenor[$i] < 3)
                 {
                     $imprime[] = $idmenor[$i];
                 }
-                else
-                {
-                    for($x = 0; $x < count($idmayor); $x++)
-                    {
-                        $imprime[] = $idmayor[$x];
-                    }
-                }
             }
-            for($y = 0; $y < count($idmenor); $y++)
+            // almaceno todos los id con id_sub = 2
+            for($a = 0; $a < count($idmayor); $a++)
+                    $imprime[] = $idmayor[$a];
+
+            for($b = 0; $b < count($idmenor); $b++)
             {
-                if($y > 2)
+                // para solo almacenar los 2 ultimos id con id_sub = 0
+                if($idmenor[$b] > 2)
                 {
-                    $imprime[] = $idmenor[$y];
+                    $imprime[] = $idmenor[$b];
                 }
             }
+            // mostrar la tabla con los id ordenados
             for($z = 0; $z < count($imprime); $z++)
             {
                 $output .= '  
