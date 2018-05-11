@@ -33,13 +33,15 @@ class modelTree{
         
     }
     public function espacios($espacios){
-        $e = "&nbsp";
-        $i = 1;
+        $EspaciosHtmlTotal='';
+        $EspaciosHtml='&nbsp;';
+        $i=1;
         while($i<$espacios){
-            $e .= $e;
+            $EspaciosHtmlTotal=$EspaciosHtmlTotal.$EspaciosHtml;
             $i++;
         }
-        return $e;
+        return $EspaciosHtmlTotal;
+
     }
 
     public function N($queryN){
