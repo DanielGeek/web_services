@@ -19,10 +19,7 @@ class modelTree{
         $output2 = '';
         $output .= "  
         <label class='text-success'>Datos</label> 
-                <table class='table table-bordered'>  
-                    <tr>
-                        <th>Id Arbol</th>
-                    </tr>  
+                <table class='table table-bordered'>
                     ";  
         $query = "SELECT * FROM IVRC_arbol WHERE id_sub = 0";
         $rows = $this->db->query($query); 
@@ -38,7 +35,13 @@ class modelTree{
                               <td>".$espacios.$id;
             if($id_sub == 0 && $tipo == 1)
             {
-            $output .= $valor.' '.$nombre;
+            $output .= $valor.' '.$nombre.'<br><br>
+            <select name="id_user_campana" id="id_user_campana" class="form-control" required>
+                <option value='.$row['id'].'>Si</option>
+                <option value='.$row['id'].'>No</option>
+                <option value='.$row['id'].'>Default</option>
+            </select>';
+            
             }
             $output .=      "</td>
                         </tr>";
