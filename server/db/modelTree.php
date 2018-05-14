@@ -69,8 +69,9 @@ class modelTree{
                 // echo $espaciosN.$idN.'<br>';
                 $queryN2 = "SELECT * FROM IVRC_arbol WHERE id_sub = $idN";
                 $this->N($queryN2);
-                return $output2;
+                
             }
+            return $output2;
             
             
     }
