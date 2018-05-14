@@ -3,6 +3,6 @@
 
 
     $Tree = new modelTree();
-    echo $valor = $Tree->getTree();
+    $valor = $Tree->getTree();
     
 ?>

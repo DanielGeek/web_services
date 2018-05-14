@@ -50,6 +50,23 @@ $(document).ready(function(){
         });
   }
 
+      getIdArbol();
+      // obtener id y nombre de IVRC_ arbol para crear la tabla de forma de arbol con las campanas creadas
+      function getIdArbol(){
+          $.get("controllers/controllerArbol/controllerGetTree.php", function(data){
+          
+          if(data){
+              $("#ivr_arbol").html(data);
+              
+          }
+          else
+          {
+              $('#ivr_arbol').addClass('alert alert-danger');
+              $('#ivr_arbol').html('Ocurrio un error con el id del arbol ivr').show(2000).delay(3000).hide(5000);
+          }
+          });
+      }
+
 
     //crear una campaña como user o master
     $('#form_campana').on('submit', function(event){

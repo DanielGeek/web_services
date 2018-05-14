@@ -316,6 +316,6 @@ if(!isset($_SESSION["type"]))
 		<script src="js/datatables/dataTables.bootstrap.min.js"></script>
 
     <script src="js/controllers/controllerCampana/controllerCampana.js" type="text/javascript"></script>
-    <script src="js/controllers/controllerArbol/controllerGetIdArbol.js" type="text/javascript"></script>
+    <!-- <script src="js/controllers/controllerArbol/controllerGetIdArbol.js" type="text/javascript"></script> -->
   </body>
 </html>

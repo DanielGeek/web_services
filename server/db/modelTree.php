@@ -29,10 +29,20 @@ class modelTree{
         foreach($rows as $row){
             $id =  $row['id'];
             $espacios = $row['espacios'];
+            $id_sub = $row['id_sub'];
+            $tipo = $row['tipo'];
+            $valor = $row['valor'];
+            $nombre = $row['seleccion'];
             $espacios = $this->espacios($espacios);
             $output .=   "<tr>
-                                <td>".$espacios.$id."</td>
-                            </tr>";
+                              <td>".$espacios.$id;
+            if($id_sub == 0 && $tipo == 1)
+            {
+            $output .= $valor.' '.$nombre;
+            }
+            $output .=      "</td>
+                        </tr>";
+            
             // echo $espacios.$id."<br>";
             // $id_sub = $row['id_sub'];
             // en la primera iteracion y la segunda id_sub = 0 imprimo los id 1, 2 luego id = 2 y existe id_sub =2, comienza a seleccionar filas el metodo $this->N($queryN)
