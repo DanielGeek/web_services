@@ -20,7 +20,7 @@ class modelTree{
         $output .= "  
         <label class='text-success'>Datos</label> 
                 <table class='table table-bordered'>  
-                    <tr>  
+                    <tr>
                         <th>Id Arbol</th>
                     </tr>  
                     ";  
@@ -53,7 +53,6 @@ class modelTree{
             $i++;
         }
         return $EspaciosHtmlTotal;
-
     }
 
     public function N($queryN){
@@ -68,12 +67,10 @@ class modelTree{
                             </tr>";
                 // echo $espaciosN.$idN.'<br>';
                 $queryN2 = "SELECT * FROM IVRC_arbol WHERE id_sub = $idN";
-                $this->N($queryN2);
+                $output2 .= $this->N($queryN2);
                 
             }
             return $output2;
-            
-            
     }
    
 
