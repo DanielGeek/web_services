@@ -4,7 +4,7 @@ $(document).ready(function(){
     getIdArbol();
     // obtener id y nombre del arbol ivr
     function getIdArbol(){
-        $.get("controllers/controllerArbol/controllerGetIdArbol.php", function(data){
+        $.get("controllers/controllerArbol/controllerGetTree.php", function(data){
         
         if(data){
             $("#ivr_arbol").html(data);

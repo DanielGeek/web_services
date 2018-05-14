@@ -23,13 +23,13 @@ class modelArbol {
         $datos = '';
         $query = "SELECT * FROM IVRC_arbol ";
         $output = '';  
-                    $output .= "  
-                    <label class='text-success'>Datos IVRC_arbol</label> 
-                            <table class='table table-bordered'>  
-                                <tr>  
-                                    <th>Id</th>
-                                </tr>  
-                                "; 
+        // $output .= "  
+        // <label class='text-success'>Datos IVRC_arbol</label> 
+        //         <table class='table table-bordered'>  
+        //             <tr>  
+        //                 <th>Id</th>
+        //             </tr>  
+        //             "; 
         $consulta = $this->db->query($query);
         if(isset($consulta))
         {
@@ -78,7 +78,7 @@ class modelArbol {
                 ';
             }
         }
-        $output .= '</table>';  
+        // $output .= '</table>';  
         return $output;
     }
 
