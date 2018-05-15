@@ -35,7 +35,8 @@ class modelTree{
                               <td>".$espacios.$id;
             if($id_sub == 0 && $tipo == 1)
             {
-            $output .= ' '.$valor.' '.$nombre.'<br><br>
+            $output .= ' '.$valor.' '.$nombre.'<br>
+            <label>Seleccione respuesta</label>
             <select name="id_user_saludo" id="id_user_saludo" class="form-control" required>
                 <option value='.$id.'>Si</option>
                 <option value='.$id.'>No</option>
@@ -69,7 +70,6 @@ class modelTree{
     public function N($queryN){
             $rowsN = $this->db->query($queryN);
             $output2 = '';
-            
 
             foreach($rowsN as $rowN){
                 $idN = $rowN['id'];
@@ -83,7 +83,8 @@ class modelTree{
                                 <td>".$espaciosN.$idN;
                 if($id_subN == 2 && $tipoN == 1)
                 {
-                    $output2 .= ' '.$valorN.' '.$nombreN.'<br><br>
+                    $output2 .= ' '.$valorN.' '.$nombreN.'<br>
+                    <label>Seleccione respuesta</label>
                     <select name="id_user_deuda" id="id_user_deuda" class="form-control" required>
                         <option value='.$idN.'>Si</option>
                         <option value='.$idN.'>No</option>
