@@ -20,6 +20,11 @@ class modelTree{
         $output .= "  
         <label class='text-success'>Datos</label> 
                 <table class='table table-bordered'>
+                    <th>ID</th>
+                    <th>Selecciona</th>
+                    <th>Saludo</th>
+                    <th>Nombre</th>
+                    <th></th>
                     ";  
         $query = "SELECT * FROM IVRC_arbol WHERE id_sub = 0";
         $rows = $this->db->query($query); 
@@ -36,13 +41,34 @@ class modelTree{
                               <td>".$espacios;
             if($id_sub == 0 && $tipo == 1)
             {
-            $output .= ' '.$valor.' '.$nombre.'<br>
-            <label>Seleccione respuesta</label>
-            <select name="id_user_saludo" id="id_user_saludo" class="form-control selectpicker" required>
-                <option value='.$id.'>Si</option>
-                <option value='.$id.'>No</option>
-                <option value='.$id.'>Default</option>
-            </select>';
+            $output .=      '
+                            <select name="id_user_id" id="id_user_id" class="form-control selectpicker" required>
+                                    <option value='.$id.'>'.$id.'</option>
+                            </select>
+                            </td>
+                            <td>
+                                
+                                <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker" required>
+                                        <option value='.$id.'>TTS</option>
+                                        <option value='.$id.'>AUDIO</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label style="margin-top: 6px;font-size: 14px;font-weight: 400;" class="text-default">Hola hablo con</label> 
+                            </td>
+                            <td>
+                                <select name="id_user_nombre" id="id_user_nombre" class="form-control selectpicker" required>
+                                        <option value='.$id.'>Luis</option>
+                                        <option value='.$id.'>Daniel</option>
+                                        <option value='.$id.'>Jessica</option>
+                                </select>
+                            </td>
+                            <td>
+                            <button class="btn btn-danger btn-block" type="submit" name="button" id="btn_submit">
+                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Saltar
+                            </button>
+                            </td>
+                        </tr>';
             }
             // echo $espacios.$id."<br>";
             // $id_sub = $row['id_sub'];
@@ -50,8 +76,7 @@ class modelTree{
             $queryN = "SELECT * FROM IVRC_arbol WHERE id_sub = $id";
             $output .= $this->N($queryN);
         }
-        $output .=      "</td>
-                    </tr>";
+
         $output .= "</table>";
         echo $output; 
     }
