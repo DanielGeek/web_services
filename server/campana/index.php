@@ -81,7 +81,10 @@ if(!isset($_SESSION["type"]))
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.min.css">
+  
     <link href="css/new.css" rel="stylesheet">
     <!-- Important. For Theming change primary-color variable in main.css  -->
 
@@ -278,6 +281,12 @@ if(!isset($_SESSION["type"]))
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap-select/bootstrap-select.min.js"></script>
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="js/bootstrap-select/i18n/defaults-*.min.js"></script>
+
     <script src="js/jquery.scrollUp.js"></script>
 
     <!-- Custom JS -->

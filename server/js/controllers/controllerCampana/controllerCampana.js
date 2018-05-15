@@ -67,6 +67,12 @@ $(document).ready(function(){
           });
       }
 
+      $('.selectpicker').selectpicker({
+        language: 'ES',
+        style: 'btn-info',
+        size: 4
+      });
+
 
     //crear una campaña como user o master
     $('#form_campana').on('submit', function(event){

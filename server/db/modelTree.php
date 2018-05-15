@@ -31,13 +31,14 @@ class modelTree{
             $valor = $row['valor'];
             $nombre = $row['seleccion'];
             $espacios = $this->espacios($espacios);
+            // $espacios.$id
             $output .=   "<tr>
-                              <td>".$espacios.$id;
+                              <td>".$espacios;
             if($id_sub == 0 && $tipo == 1)
             {
             $output .= ' '.$valor.' '.$nombre.'<br>
             <label>Seleccione respuesta</label>
-            <select name="id_user_saludo" id="id_user_saludo" class="form-control" required>
+            <select name="id_user_saludo" id="id_user_saludo" class="form-control selectpicker" required>
                 <option value='.$id.'>Si</option>
                 <option value='.$id.'>No</option>
                 <option value='.$id.'>Default</option>
@@ -79,13 +80,15 @@ class modelTree{
                 $valorN = $rowN['valor'];
                 $nombreN = $rowN['seleccion'];
                 $espaciosN = $this->espacios($espaciosN);
+                // .$espaciosN.$idN
                 $output2 .=   "<tr>
-                                <td>".$espaciosN.$idN;
+                                    <td>".$espaciosN;
                 if($id_subN == 2 && $tipoN == 1)
                 {
-                    $output2 .= ' '.$valorN.' '.$nombreN.'<br>
-                    <label>Seleccione respuesta</label>
-                    <select name="id_user_deuda" id="id_user_deuda" class="form-control" required>
+                    $output2 .= ' '.$valorN.' '.$nombreN.'<br>'
+                    .$espaciosN.'<label>Seleccione respuesta</label>'
+                    .$espaciosN.
+                    '<select name="id_user_deuda" id="id_user_deuda" class="form-control selectpicker" required>
                         <option value='.$idN.'>Si</option>
                         <option value='.$idN.'>No</option>
                         <option value='.$idN.'>Default</option>
