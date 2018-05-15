@@ -35,23 +35,21 @@ class modelTree{
                               <td>".$espacios.$id;
             if($id_sub == 0 && $tipo == 1)
             {
-            $output .= $valor.' '.$nombre.'<br><br>
-            <select name="id_user_campana" id="id_user_campana" class="form-control" required>
-                <option value='.$row['id'].'>Si</option>
-                <option value='.$row['id'].'>No</option>
-                <option value='.$row['id'].'>Default</option>
+            $output .= ' '.$valor.' '.$nombre.'<br><br>
+            <select name="id_user_saludo" id="id_user_saludo" class="form-control" required>
+                <option value='.$id.'>Si</option>
+                <option value='.$id.'>No</option>
+                <option value='.$id.'>Default</option>
             </select>';
-            
             }
-            $output .=      "</td>
-                        </tr>";
-            
             // echo $espacios.$id."<br>";
             // $id_sub = $row['id_sub'];
             // en la primera iteracion y la segunda id_sub = 0 imprimo los id 1, 2 luego id = 2 y existe id_sub =2, comienza a seleccionar filas el metodo $this->N($queryN)
             $queryN = "SELECT * FROM IVRC_arbol WHERE id_sub = $id";
             $output .= $this->N($queryN);
         }
+        $output .=      "</td>
+                    </tr>";
         $output .= "</table>";
         echo $output; 
     }
@@ -71,12 +69,28 @@ class modelTree{
     public function N($queryN){
             $rowsN = $this->db->query($queryN);
             $output2 = '';
+            
+
             foreach($rowsN as $rowN){
                 $idN = $rowN['id'];
                 $espaciosN = $rowN['espacios'];
+                $id_subN = $rowN['id_sub'];
+                $tipoN = $rowN['tipo'];
+                $valorN = $rowN['valor'];
+                $nombreN = $rowN['seleccion'];
                 $espaciosN = $this->espacios($espaciosN);
                 $output2 .=   "<tr>
-                                <td>".$espaciosN.$idN."</td>
+                                <td>".$espaciosN.$idN;
+                if($id_subN == 2 && $tipoN == 1)
+                {
+                    $output2 .= ' '.$valorN.' '.$nombreN.'<br><br>
+                    <select name="id_user_deuda" id="id_user_deuda" class="form-control" required>
+                        <option value='.$idN.'>Si</option>
+                        <option value='.$idN.'>No</option>
+                        <option value='.$idN.'>Default</option>
+                    </select>';
+                }
+                $output2 .=      "</td>
                             </tr>";
                 // echo $espaciosN.$idN.'<br>';
                 $queryN2 = "SELECT * FROM IVRC_arbol WHERE id_sub = $idN";
