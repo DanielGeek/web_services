@@ -156,21 +156,23 @@ if(!isset($_SESSION["type"]))
                   </ul>
               </li>
               <li class='active'>
-                <a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana"><i class="fa fa-dashboard"></i>IVR Cognitivo</a>
+                <a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana"><i class="fa fa-dashboard"></i>IVRC Cognitivo</a>
                 <ul>
                   <?php
                   if($_SESSION['type'] == 'master')
                   {
                   ?>
-                  <li><a href='#collapseVerCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVerCampana">Ver Campañas</a></li>
+                  <li><a href='#collapseSubirData' data-toggle="collapse" aria-expanded="false" aria-controls="collapseSubirData">Subir Data</a></li>
                   <?php
                   }
                   ?>
                   <li><a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana">Crear Campaña</a></li>
-                  <li><a href='#collapseVariables' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVariables">Variables</a></li>
+                  
                  
                 </ul>
               </li>
+
+
               <!-- modulo config inicio -->
               <li class=''>
               <a href='edit_profile'><i class="fa fa-dashboard"></i>Config</a>
@@ -186,13 +188,13 @@ if(!isset($_SESSION["type"]))
           <!-- Sub Nav End -->
           <div class="sub-nav hidden-sm hidden-xs">
             <ul>
-              <li><a href="#collapseCrearCampana" data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana" class="heading">IVR Congnitivo</a></li>
+              <li><a href="#collapseCrearCampana" data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana" class="heading">IVRC Congnitivo</a></li>
               <?php
               if($_SESSION['type'] == 'master')
               {
               ?>
               <li class="hidden-sm hidden-xs">
-                <a href='#collapseVerCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVerCampana">Ver Campañas</a>
+                <a href='#collapseSubirData' data-toggle="collapse" aria-expanded="false" aria-controls="collapseSubirData">Subir Data</a>
               </li>
               <?php
               }
@@ -200,9 +202,6 @@ if(!isset($_SESSION["type"]))
               <li class="hidden-sm hidden-xs">
                 <a href='#collapseCrearCampana' data-toggle="collapse" aria-expanded="false" aria-controls="collapseCrearCampana">Crear Campaña</a>
                 <!-- poner esta clase en el elemto a para activar la seleccion class="selected" -->
-              </li>
-              <li class="hidden-sm hidden-xs">
-                <a href='#collapseVariables' data-toggle="collapse" aria-expanded="false" aria-controls="collapseVariables">Variables</a>
               </li>
              
             </ul>
@@ -215,13 +214,44 @@ if(!isset($_SESSION["type"]))
 
           <!-- Dashboard Wrapper Start -->
           <div class="dashboard-wrapper">
+
+              <!-- Row Start Subir Data -->
+            <?php
+            if($_SESSION['type'] == 'master')
+            {
+            ?>
+            <div id="collapseSubirData" class="row gutter collapse in" aria-labelledby="collapseSubirData" data-parent="#accordion">
+              <div class="col-lg-12 col-md-12">
+                <div class="widget no-margin">
+                  <div class="widget-header">
+                    <div class="title">
+                      Subir Data
+                    </div>
+                    <span class="tools">
+                      <i class="fa fa-cogs"></i>
+                    </span>
+                  </div>
+                  <div class="widget-body">
+                    <div class="row gutter">
+                    
+                      <?php include "crud_campana.php"; ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <?php
+            }
+            ?>
+            <!-- Row End Subir Data -->
+            <br>
             <!-- Row Start CrearCampana -->
             <div id="collapseCrearCampana" class="row gutter collapse in" aria-labelledby="collapseCrearCampana" data-parent="#accordion">
               <div class="col-lg-12 col-md-12">
                 <div class="widget no-margin">
                   <div class="widget-header">
                     <div class="title">
-                      Crear Campañas
+                      Campañas
                     </div>
                     <span class="tools">
                       <i class="fa fa-cogs"></i>
@@ -237,36 +267,6 @@ if(!isset($_SESSION["type"]))
               </div>
             </div>
             <!-- Row End CrearCampana -->
-            <br>
-            
-            <!-- Row Start Ver Campana -->
-            <?php
-            if($_SESSION['type'] == 'master')
-            {
-            ?>
-            <div id="collapseVerCampana" class="row gutter collapse in" aria-labelledby="collapseVerCampana" data-parent="#accordion">
-              <div class="col-lg-12 col-md-12">
-                <div class="widget no-margin">
-                  <div class="widget-header">
-                    <div class="title">
-                      Ver Campañas
-                    </div>
-                    <span class="tools">
-                      <i class="fa fa-cogs"></i>
-                    </span>
-                  </div>
-                  <div class="widget-body">
-                    <div class="row gutter">
-                      <?php include "crud_campana.php"; ?>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <?php
-            }
-            ?>
-            <!-- Row End Ver Campana -->
             
           </div>
           <!-- Dashboard Wrapper End -->

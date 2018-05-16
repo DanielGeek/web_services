@@ -267,11 +267,12 @@ class modelCampana {
     }
 
     // metodo para crear campaña como user o master
-    public function crearCampana($fileCrearCampana, $campana_name)
+    public function subirData($fileCrearCampana)
     {
-        if(isset($_POST['campana_name']))
+        if(isset($_FILES["file_crear_campana"]))
         {
-            $campana_name = $_POST['campana_name'];
+            // $campana_name = $_POST['campana_name'];
+            $campana_name = 'campaña inactiva';
             $query_campana = "  
             INSERT INTO IVRC_campana 
             (campana_name)   
@@ -280,7 +281,7 @@ class modelCampana {
             mysqli_query($this->db, $query_campana);
             //obtener el ultimo id de la consulta insert
             $id_campana = $this->db->insert_id;
-
+            
             if(!empty($_FILES["file_crear_campana"]))  
             {  
                 $id_user = $_SESSION['id'];
@@ -295,7 +296,7 @@ class modelCampana {
                     <label class='text-success'>Datos insertados</label> 
                             <table class='table table-bordered'>  
                                 <tr>  
-                                    <th>Nombre Campaña</th>
+                                    
                                     <th>Rut</th>  
                                     <th>Nombre</th>  
                                     <th>Telefono</th>  
@@ -321,7 +322,6 @@ class modelCampana {
                                 mysqli_query($this->db, $query);  
                                 $output .= '  
                                 <tr> 
-                                    <td>'.$campana_name.'</td> 
                                     <td>'.$rut.'</td>
                                     <td id='.$nombre.$contador.'>'.$user_name.'</td>
                                     <td>'.$user_telefono.'</td>
@@ -353,7 +353,7 @@ class modelCampana {
         }
         else
         {
-            echo '<div class="alert alert-danger">Introduzca nombre de la campaña</div>';
+            echo '<div class="alert alert-danger">Introduzca un archivo excel con datos</div>';
         }
 
     }
