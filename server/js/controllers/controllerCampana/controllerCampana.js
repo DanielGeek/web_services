@@ -66,6 +66,15 @@ $(document).ready(function(){
           }
           });
       }
+      $('#ivr_arbol').hide();
+
+      $('#btn_submit_campana').click(function(){
+          console.log($('#id_user_data option:selected').text());
+          if($('#campana_name').val() != '' && $('#id_user_data option:selected').text() != '')
+          {
+            $('#ivr_arbol').show();
+          }
+      });
 
       $('.selectpicker').selectpicker({
         language: 'ES'

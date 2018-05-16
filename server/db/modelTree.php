@@ -45,12 +45,14 @@ class modelTree{
                             <td>
                                 
                                 <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                        <option value='.$id.'>TTS</option>
-                                        <option value='.$id.'>AUDIO</option>
+                                        <option value="TTS">TTS</option>
+                                        <option value="AUDIO">AUDIO</option>
                                 </select>
                             </td>
                             <td>
-                                <label style="margin-top: 6px;font-size: 14px;font-weight: 400;" class="text-default">Hola hablo con</label> 
+                                <div class="form-group col-md-">
+                                    <input type="text" class="form-control" placeholder="Ingrese un texto: " name="campana_saludo" id="campana_saludo" required/>
+                                </div>
                             </td>
                             <td>
                                 <select name="id_user_nombre" id="id_user_nombre" class="form-control selectpicker" multiple data-max-options="1" required>
