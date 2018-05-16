@@ -17,8 +17,7 @@ class modelTree{
     {  
         $output = '';
         $output2 = '';
-        $output .= "  
-        <label class='text-success'>Datos</label> 
+        $output .= " 
                 <table class='table table-bordered'>
                     <th>ID</th>
                     <th>Selecciona</th>
@@ -38,17 +37,14 @@ class modelTree{
             $espacios = $this->espacios($espacios);
             // $espacios.$id
             $output .=   "<tr>
-                              <td>".$espacios;
+                              <td>".$espacios.$id;
             if($id_sub == 0 && $tipo == 1)
             {
             $output .=      '
-                            <select name="id_user_id" id="id_user_id" class="form-control selectpicker" required>
-                                    <option value='.$id.'>'.$id.'</option>
-                            </select>
                             </td>
                             <td>
                                 
-                                <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker" required>
+                                <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker" multiple multiple data-max-options="1" required>
                                         <option value='.$id.'>TTS</option>
                                         <option value='.$id.'>AUDIO</option>
                                 </select>
@@ -57,7 +53,7 @@ class modelTree{
                                 <label style="margin-top: 6px;font-size: 14px;font-weight: 400;" class="text-default">Hola hablo con</label> 
                             </td>
                             <td>
-                                <select name="id_user_nombre" id="id_user_nombre" class="form-control selectpicker" required>
+                                <select name="id_user_nombre" id="id_user_nombre" class="form-control selectpicker" multiple data-max-options="1" required>
                                         <option value='.$id.'>Luis</option>
                                         <option value='.$id.'>Daniel</option>
                                         <option value='.$id.'>Jessica</option>
@@ -107,20 +103,10 @@ class modelTree{
                 $espaciosN = $this->espacios($espaciosN);
                 // .$espaciosN.$idN
                 $output2 .=   "<tr>
-                                    <td>".$espaciosN;
-                if($id_subN == 2 && $tipoN == 1)
-                {
-                    $output2 .= ' '.$valorN.' '.$nombreN.'<br>'
-                    .$espaciosN.'<label>Seleccione respuesta</label>'
-                    .$espaciosN.
-                    '<select name="id_user_deuda" id="id_user_deuda" class="form-control selectpicker" required>
-                        <option value='.$idN.'>Si</option>
-                        <option value='.$idN.'>No</option>
-                        <option value='.$idN.'>Default</option>
-                    </select>';
-                }
-                $output2 .=      "</td>
-                            </tr>";
+                                    <td>".$espaciosN.$idN;
+                
+                $output2 .=         "</td>
+                                </tr>";
                 // echo $espaciosN.$idN.'<br>';
                 $queryN2 = "SELECT * FROM IVRC_arbol WHERE id_sub = $idN";
                 $output2 .= $this->N($queryN2);

@@ -285,7 +285,7 @@ if(!isset($_SESSION["type"]))
     <!-- Latest compiled and minified JavaScript -->
     <script src="js/bootstrap-select/bootstrap-select.min.js"></script>
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="js/bootstrap-select/i18n/defaults-*.min.js"></script>
+    <script src="js/bootstrap-select/i18n/defaults-es_CL.min.js"></script>
 
     <script src="js/jquery.scrollUp.js"></script>
 

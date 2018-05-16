@@ -68,9 +68,7 @@ $(document).ready(function(){
       }
 
       $('.selectpicker').selectpicker({
-        language: 'ES',
-        style: 'btn-info',
-        size: 4
+        language: 'ES'
       });
 
 
