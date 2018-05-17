@@ -15,19 +15,19 @@
                         </div>
                        
                         <div class="clear:both"></div>
-                        
                     </div>
                    <!-- inicio form subir data -->
-                    <br>
+                   <br>
                     <div id="result" class="text-center"></div>
+
                     <form id="form_campana_data" method="post" enctype="multipart/form-data">
                         <div id="box-correo">
                         
-                            <div class="form-group col-md-2">
-                                <label for="campana_name">Subir Data:</label>
+                            <div class="form-group col-md-3">
+                                <input style="height:40px !important;" type="text" class="form-control" placeholder="Nombre Data: " name="nombre_data" id="nombre_data" required/>
                             </div>
                             
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-3">
                                 <label style="line-height: 0px;" class="btn btn-info btn-file">
                                     Seleccione Data<input style="cursor:pointer;padding-top:10px; font-size:10px;" type="file" name="file_crear_campana" id="file_crear_campana" required/>
                                 </label>
@@ -39,7 +39,7 @@
                                 </a>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <button style="padding:10px !important;" class="form-group btn btn-primary btn-block" type="submit" name="button" id="btn_submit">
                                         <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Subir
                                 </button>
@@ -47,6 +47,7 @@
                             
                         </div>
                     </form>
+                    <br><br>
                     <hr>
                     <!-- fin form subir data -->
                     

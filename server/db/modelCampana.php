@@ -267,93 +267,113 @@ class modelCampana {
     }
 
     // metodo para crear campaña como user o master
-    public function subirData($fileCrearCampana)
+    public function subirData($fileCrearCampana, $nombreData)
     {
-        if(isset($_FILES["file_crear_campana"]))
+        if(isset($_POST['nombre_data']) && $_POST['nombre_data'] != '')
         {
-            // $campana_name = $_POST['campana_name'];
-            $campana_name = 'campaña inactiva';
-            $query_campana = "  
-            INSERT INTO IVRC_campana 
-            (campana_name)   
-            VALUES ('".$campana_name."')
-            ";
-            mysqli_query($this->db, $query_campana);
-            //obtener el ultimo id de la consulta insert
-            $id_campana = $this->db->insert_id;
-            
-            if(!empty($_FILES["file_crear_campana"]))  
-            {  
-                $id_user = $_SESSION['id'];
-                $file_array = explode(".", $_FILES["file_crear_campana"]["name"]);  
-                if($file_array[1] == "xls" || $file_array[1] == "xlsx")  
+            if(isset($_FILES["file_crear_campana"]))
+            {
+                //datos para la tabla de IVRC_nombre_data
+                $nombre_data = $_POST['nombre_data'];
+                // $nombre_data = 'campaña inactiva';
+                $query_nombre_data = "  
+                INSERT INTO IVRC_nombre_data
+                (nombre)   
+                VALUES ('".$nombre_data."')
+                ";
+                mysqli_query($this->db, $query_nombre_data);
+                //obtener el ultimo id de la consulta insert
+                $id_nombre_data = $this->db->insert_id;
+                
+                //datos para la tabla de IVRC_campana
+                $campana_name = 'campaña inactiva';
+                $query_campana = "  
+                INSERT INTO IVRC_campana 
+                (campana_name)   
+                VALUES ('".$campana_name."')
+                ";
+                mysqli_query($this->db, $query_campana);
+                //obtener el ultimo id de la consulta insert
+                $id_campana = $this->db->insert_id;
+                
+                if(!empty($_FILES["file_crear_campana"]))
                 {  
-                    include("../../lib/PHPExcel/IOFactory.php");
-                    $contador = 1;
-                    $nombre = 'nombre';
-                    $output = '';  
-                    $output .= "  
-                    <label class='text-success'>Datos insertados</label> 
-                            <table class='table table-bordered'>  
-                                <tr>  
-                                    
-                                    <th>Rut</th>  
-                                    <th>Nombre</th>  
-                                    <th>Telefono</th>  
-                                    <th>Deuda</th>
-                                </tr>  
-                                ";  
-                    $object = PHPExcel_IOFactory::load($_FILES["file_crear_campana"]["tmp_name"]);  
-                    foreach($object->getWorksheetIterator() as $worksheet)  
+                    $id_user = $_SESSION['id'];
+                    $file_array = explode(".", $_FILES["file_crear_campana"]["name"]);  
+                    if($file_array[1] == "xls" || $file_array[1] == "xlsx")  
                     {  
-                            $highestRow = $worksheet->getHighestRow();  
-                            for($row=2; $row<=$highestRow; $row++)  
-                            {  
-                                $rut = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(0, $row)->getValue());  
-                                $user_name = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(1, $row)->getValue());  
-                                $user_telefono = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(2, $row)->getValue());  
-                                $user_deuda = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(3, $row)->getValue());  
+                        include("../../lib/PHPExcel/IOFactory.php");
+                        $contador = 1;
+                        $nombre = 'nombre';
+                        $output = '';  
+                        $output .= "  
+                        <label class='text-success'>Datos insertados</label> 
+                                <table class='table table-bordered'>  
+                                    <tr>  
+                                        <th>Nombre Data</th>
+                                        <th>Rut</th>  
+                                        <th>Nombre</th>  
+                                        <th>Telefono</th>  
+                                        <th>Deuda</th>
+                                    </tr>  
+                                    ";  
+                        $object = PHPExcel_IOFactory::load($_FILES["file_crear_campana"]["tmp_name"]);  
+                        foreach($object->getWorksheetIterator() as $worksheet)  
+                        {  
+                                $highestRow = $worksheet->getHighestRow();  
+                                for($row=2; $row<=$highestRow; $row++)  
+                                {  
+                                    $rut = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(0, $row)->getValue());  
+                                    $user_name = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(1, $row)->getValue());  
+                                    $user_telefono = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(2, $row)->getValue());  
+                                    $user_deuda = mysqli_real_escape_string($this->db, $worksheet->getCellByColumnAndRow(3, $row)->getValue());  
 
-                                $query = "  
-                                INSERT INTO IVRC_campana_data  
-                                (id_user, rut, user_name, user_telefono, user_deuda, id_campana)   
-                                VALUES ('".$id_user."','".$rut."', '".$user_name."', '".$user_telefono."', '".$user_deuda."', '".$id_campana."')
-                                ";  
-                                mysqli_query($this->db, $query);  
-                                $output .= '  
-                                <tr> 
-                                    <td>'.$rut.'</td>
-                                    <td id='.$nombre.$contador.'>'.$user_name.'</td>
-                                    <td>'.$user_telefono.'</td>
-                                    <td>'.$user_deuda.'</td>
-                                </tr>
-                                ';
-                            $contador++;
-                            } 
-                             
+                                    $query = "  
+                                    INSERT INTO IVRC_campana_data  
+                                    (id_user, rut, user_name, user_telefono, user_deuda, id_campana, id_nombre_data)   
+                                    VALUES ('".$id_user."','".$rut."', '".$user_name."', '".$user_telefono."', '".$user_deuda."',
+                                    '".$id_campana."', '".$id_nombre_data."')";  
+                                    mysqli_query($this->db, $query);
+                                    $output .= '  
+                                    <tr> 
+                                        <td>'.$nombre_data.'</td>
+                                        <td>'.$rut.'</td>
+                                        <td id='.$nombre.$contador.'>'.$user_name.'</td>
+                                        <td>'.$user_telefono.'</td>
+                                        <td>'.$user_deuda.'</td>
+                                    </tr>
+                                    ';
+                                $contador++;
+                                } 
+                                
+                        }  
+                        $output .= '</table>';  
+                        
+                        // echo $output;
+
+                        //guardo en el ultimo elemento del array la tabla
+                        // $data['tabla'] = $output;
+                    echo $output;
+                        // return json_encode($data);
                     }  
-                    $output .= '</table>';  
-                    
-                    // echo $output;
-
-                    //guardo en el ultimo elemento del array la tabla
-                    // $data['tabla'] = $output;
-                   echo $output;
-                    // return json_encode($data);
+                    else  
+                    {  
+                        echo '<div class="alert alert-danger">Archivo invalido</div>';  
+                    }  
                 }  
-                else  
-                {  
-                    echo '<div class="alert alert-danger">Archivo invalido</div>';  
-                }  
-            }  
+                else
+                {
+                    echo '<div class="alert alert-danger">No se encontro un archivo excel</div>';
+                }
+            }
             else
             {
-                echo '<div class="alert alert-danger">No se encontro un archivo excel</div>';
+                echo '<div class="alert alert-danger">Introduzca un archivo excel con datos</div>';
             }
-        }
+            }
         else
         {
-            echo '<div class="alert alert-danger">Introduzca un archivo excel con datos</div>';
+            echo '<div class="alert alert-danger">Introduzca un nombre para la data</div>';
         }
 
     }
