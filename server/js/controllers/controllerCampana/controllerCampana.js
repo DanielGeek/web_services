@@ -2,17 +2,6 @@
 
 $(document).ready(function(){
 
-    // $("#form_campana").validate({
-    //     rules         : {
-    //         campana_name      : { required : true, minlength: 2},
-    //         file_crear_campana         : { required : true}
-    //     },
-    //     messages      : {
-    //         campana_name        : "Debe introducir un nombre de Campaña.",
-    //         file_crear_campana  : "Debe introducir un rut."
-    //     }
-    // });
-
     $("#user_form2").validate({
         rules         : {
             id_user         : { required : true, minlength: 1},
@@ -40,7 +29,6 @@ $(document).ready(function(){
           // si existe un json lo parseo
           if(data){
             $("#id_user").append(data);
-            
           }
           else
           {
@@ -66,22 +54,50 @@ $(document).ready(function(){
           }
           });
       }
-      $('#ivr_arbol').hide();
 
-      $('#btn_submit_campana').click(function(){
-          console.log($('#id_user_data option:selected').text());
-          if($('#campana_name').val() != '' && $('#id_user_data option:selected').text() != '')
-          {
-            $('#ivr_arbol').show();
-          }
-      });
+      
+      
+      //verifica si existe data de algun excel para crear campañas
+      $('#ivr_arbol').hide(2000);
+      VerificarData();
+      function VerificarData(){
+        $.get("controllers/controllerArbol/controllerGetCampanaData.php", function(datajson){
+            var data = $.parseJSON(datajson);
+            if(data.filas >= 1)
+            {
+                $('#form_campana').show(2000);
+                $('#btn_submit_campana').click(function(){
+                    var nombre_campana = $('#campana_name');
+                    var select_data = $('#id_user_data option:selected').text()
+                    if(nombre_campana.val() != '' && select_data != '')
+                    {
+                        console.log(nombre_campana.val() +' '+ select_data);
+                        nombre_campana.val('');
+                        $('#ivr_arbol').show(2000);
+                    }
+                });
+                console.log('Total Data ' + data.filas);
+                $('.selectpicker').selectpicker('deselectAll');
+                
+            }
+            else
+            {
+                alert('No existe data para la crear camapañas');
+                $('#form_campana').hide(2000);
+                $('#ivr_arbol').hide(2000);
+            }
+        });
+      }
+
+      
 
       $('.selectpicker').selectpicker({
-        language: 'ES'
+        language: 'ES',
+        deselectAllText: 'Deselect All'
       });
 
 
-    //crear una campaña como user o master
+    //subir data para una campaña como user o master
     $('#form_campana_data').on('submit', function(event){
         event.preventDefault();  
         $('#btn_submit').attr('disabled','disabled');
@@ -94,10 +110,11 @@ $(document).ready(function(){
               success:function(data){  
                 //   $('#result').html(data).show(2000).delay(3000).hide(5000);
                   $('#result').html(data);
-                  
+                  $('#form_campana').show(2000);
                   $('#file_crear_campana').val('');
                   $('#btn_submit').attr('disabled', false);
                   userdataTable.ajax.reload();
+                  VerificarData();
               }
         });
     });

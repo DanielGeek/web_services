@@ -12,6 +12,29 @@ class modelTree{
        $this->db=Conectar::conexion();
        $this->session = session_start();
     }
+
+    public function getCampanaData()
+    {
+        $query = '';
+        $output = array();
+
+        $query = " SELECT * FROM IVRC_campana_data ";
+        //ejecutamos la consulta
+        $consulta = $this->db->query($query);
+        $respuesta = $consulta->fetch_all(MYSQLI_ASSOC);
+        $data = array();
+        //uso el metodo cout() para saber si existe al menos 1 elemento en el array
+        $filas = count($respuesta);
+        $output = array(
+            "filas" => $filas
+        );
+        return json_encode($output);
+        //cierro consulta para que no quede en memoria
+        $respuesta->close();
+        // cierro conexion a la bd
+        $this->db->close();
+    }
+
     //obtener ids ordenados de la campana
     public function getTree()
     {  

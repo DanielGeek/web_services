@@ -18,9 +18,8 @@
                                     
                                     <div class="form-group col-md-3">
                                         <select name="id_user_data" id="id_user_data" class="form-control selectpicker" multiple data-max-options="1" required>
-                                            <option value=''>Data 1</option>
-                                            <option value=''>Data 2</option>
-                                            <option value=''>Data 3</option>
+                                            <option value='A'>Columna A</option>
+                                            
                                         </select>
                                     </div>
                                     
@@ -29,7 +28,7 @@
                                                 <i class="fa fa-paper-plane-o" aria-hidden="true"></i> CREAR
                                         </button>
                                     </div>
-                                    
+                                    <br>
                                     <div id="ivr_arbol">
                                     </div>
                             </form>
