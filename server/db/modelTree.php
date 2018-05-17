@@ -13,20 +13,47 @@ class modelTree{
        $this->session = session_start();
     }
 
-    public function getCampanaData()
+    public function getNombreData()
     {
         $query = '';
         $output = array();
+    }
+
+    public function getCampanaData()
+    {
+        $query = '';
+        
+        $query_nombre_data = '';
 
         $query = " SELECT * FROM IVRC_campana_data ";
         //ejecutamos la consulta
         $consulta = $this->db->query($query);
         $respuesta = $consulta->fetch_all(MYSQLI_ASSOC);
+        $selectpicker = '';
+        $output = array();
         $data = array();
         //uso el metodo cout() para saber si existe al menos 1 elemento en el array
         $filas = count($respuesta);
+        if($filas >= 1)
+        {
+            $query_nombre_data = "select * from IVRC_nombre_data";
+            //ejecutamos la consulta
+            $consulta_nombre_data = $this->db->query($query_nombre_data);
+            $respuesta_nombre_data = $consulta_nombre_data->fetch_all(MYSQLI_ASSOC);
+            $selectpicker .= '<select name="id_user_data" id="id_user_data" class="form-control selectpicker" multiple data-max-options="1" required>';
+            foreach($respuesta_nombre_data as $nombre_data)
+            {
+                $selectpicker .= '<option id="'.$nombre_data["id"].'" value="'.$nombre_data['nombre'].'">'.$nombre_data["nombre"].'</option>';
+                // $sub_data[] = $nombre_data['nombre'];
+                // $data[] = $sub_data;
+            }
+            $selectpicker .= '</select>';
+            $data[] = $selectpicker;
+
+        }
         $output = array(
-            "filas" => $filas
+            "filas" => $filas,
+            "data"  => $data 
         );
         return json_encode($output);
         //cierro consulta para que no quede en memoria

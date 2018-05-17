@@ -65,29 +65,60 @@ $(document).ready(function(){
             var data = $.parseJSON(datajson);
             if(data.filas >= 1)
             {
+                
+                console.log(data);
                 $('#form_campana').show(2000);
+                $(".select_user_data").html(data.data[0]);
                 $('#btn_submit_campana').click(function(){
+                    
                     var nombre_campana = $('#campana_name');
-                    var select_data = $('#id_user_data option:selected').text()
+                    var select_data = $('#id_user_data option:selected').text();
                     if(nombre_campana.val() != '' && select_data != '')
                     {
-                        console.log(nombre_campana.val() +' '+ select_data);
-                        nombre_campana.val('');
+                        $( "#form_campana" ).submit();
                         $('#ivr_arbol').show(2000);
+                        
+                    }
+                    else
+                    {
+                        $('#mensaje_campanas').fadeIn(6000).html('<div class="alert alert-danger">Complete todo el formulario para la Campaña</div>').delay(3000).fadeOut(3000);
                     }
                 });
-                console.log('Total Data ' + data.filas);
                 $('.selectpicker').selectpicker('deselectAll');
-                
             }
             else
             {
-                alert('No existe data para la crear camapañas');
+                
+                $('#result').fadeIn(6000).html('<div class="alert alert-danger">No existe data, suba excel para Comenzar una Campaña</div>').delay(3000).fadeOut(3000);
                 $('#form_campana').hide(2000);
                 $('#ivr_arbol').hide(2000);
             }
         });
       }
+
+      //crear la campaña
+    $('#form_campana').on('submit', function(event){
+        event.preventDefault();  
+        $('#btn_submit_campana').attr('disabled','disabled');
+        var campana_data = $(this).serialize();
+        console.log(campana_data);return;
+        $.ajax({
+              url:"controllers/controllerCampana/controllerCampana.php",
+              method:"POST",  
+              data:new FormData(this),
+              contentType:false,  
+              processData:false,  
+              success:function(data){  
+                //   $('#result').html(data).show(2000).delay(3000).hide(5000);
+                  $('#result').html(data);
+                  $('#form_campana').show(2000);
+                  $('#file_crear_campana').val('');
+                  $('#btn_submit_campana').attr('disabled', false);
+                  userdataTable.ajax.reload();
+                  VerificarData();
+              }
+        });
+    });
 
       
 
