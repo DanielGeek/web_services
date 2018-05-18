@@ -69,6 +69,7 @@ $(document).ready(function(){
                 console.log(data);
                 $('#form_campana').show(2000);
                 $(".div_user_data").html(data.data[0]);
+                $('#ivr_arbol').show(1000);
                 // $('#btn_submit_campana').click(function(){
                     
                 //     var nombre_campana = $('#campana_name');

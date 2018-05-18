@@ -151,7 +151,7 @@ class modelTree{
             $espacios = $this->espacios($espacios);
             // $espacios.$id
             $output .=   "<tr>
-                              <td>".$espacios.$id;
+                              <td>".$espacios.$id."<i class='fa fa-folder-open'></i>";
             if($id_sub == 0 && $tipo == 1)
             {
             $output .=      '
@@ -219,7 +219,7 @@ class modelTree{
                 $espaciosN = $this->espacios($espaciosN);
                 // .$espaciosN.$idN
                 $output2 .=   "<tr>
-                                    <td>".$espaciosN.$idN;
+                                    <td>".$espaciosN.$idN."<i class='fa fa-folder-open'></i>";
                 
                 $output2 .=         "</td>
                                 </tr>";
