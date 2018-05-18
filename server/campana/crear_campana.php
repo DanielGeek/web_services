@@ -16,7 +16,7 @@
                                         <input  type="text" class="form-control" placeholder="Nombre campaña: " name="campana_name" id="campana_name" required/>
                                     </div>
                                     
-                                    <div class="form-group col-md-3 select_user_data">
+                                    <div class="form-group col-md-3 div_user_data">
                                     </div>
                                     
                                     <div class="col-md-3">

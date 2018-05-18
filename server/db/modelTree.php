@@ -13,10 +13,74 @@ class modelTree{
        $this->session = session_start();
     }
 
-    public function getNombreData()
+    public function InsertCampana()
     {
-        $query = '';
+        $nombre_campana = $_POST['campana_name'];
+        $nombre_data = $_POST['select_user_data'];
+        $id_nombre_data = $_POST['option_user_id'];
+        $query_campana = '';
         $output = array();
+        $mensaje = '';
+        if(isset($nombre_campana) && $nombre_campana != '')
+        {
+            if(isset($nombre_data) && $nombre_data != '')
+            {
+                if(isset($id_nombre_data) && $id_nombre_data != '')
+                {
+                    $query_campana = "
+                    insert into IVRC_campana (campana_name)
+                    values ('".$nombre_campana."');
+                    ";
+                    $consultaIVRC_campana = $this->db->query($query_campana);
+                    
+                    //si se inserto la consulta
+                    if(isset($consultaIVRC_campana) && $consultaIVRC_campana > 0)
+                    {
+                        //obtener el ultimo id de la consulta insert
+                        $id_campana = $this->db->insert_id;
+                        //actualizo el id_campana de la tabla IVRC_campana_data con el ultimo id de la campana creada para asociarla con la data seleccionada
+                        $query_actualizar_id_campana_data = "UPDATE IVRC_campana_data SET id_campana = '".$id_campana."'
+                                                         WHERE id_nombre_data = '".$id_nombre_data."' ";
+                        $consultaIVRC_campana_data = $this->db->query($query_actualizar_id_campana_data);
+
+                        //si se actualizo
+                        if(isset($consultaIVRC_campana_data) && $consultaIVRC_campana_data > 0)
+                        {
+                            $mensaje = 'ok';
+                        }
+                        else
+                        {
+                            $mensaje = 'No se logro actualizar el id_campana en la tabla IVRC_campana_data';
+                        }
+                    }
+                    else
+                    {
+                        $mensaje = 'No se pudo agregar el nombre de la campana';
+                    }
+                    
+                }
+                else
+                {
+                    $mensaje = 'El id de la data seleccionada no se encuentra';
+                }
+
+            }
+            else
+            {
+                $mensaje = 'Seleccione el nombre de la data';
+            }
+        }
+        else
+        {
+            $mensaje = 'Ingrese el nombre de la campaña';
+            
+        }
+        $output = array(
+            'mensaje' => $mensaje
+        );
+
+        return json_encode($output);
+        
     }
 
     public function getCampanaData()
@@ -40,10 +104,10 @@ class modelTree{
             //ejecutamos la consulta
             $consulta_nombre_data = $this->db->query($query_nombre_data);
             $respuesta_nombre_data = $consulta_nombre_data->fetch_all(MYSQLI_ASSOC);
-            $selectpicker .= '<select name="id_user_data" id="id_user_data" class="form-control selectpicker" multiple data-max-options="1" required>';
+            $selectpicker .= '<select name="select_user_data" id="select_user_data" class="form-control selectpicker" multiple data-max-options="1" title="Seleccione Data..." required>';
             foreach($respuesta_nombre_data as $nombre_data)
             {
-                $selectpicker .= '<option id="'.$nombre_data["id"].'" value="'.$nombre_data['nombre'].'">'.$nombre_data["nombre"].'</option>';
+                $selectpicker .= '<option id="'.$nombre_data["id"].'" name="option_user_data" value="'.$nombre_data['nombre'].'">'.$nombre_data["nombre"].'</option>';
                 // $sub_data[] = $nombre_data['nombre'];
                 // $data[] = $sub_data;
             }
@@ -57,7 +121,7 @@ class modelTree{
         );
         return json_encode($output);
         //cierro consulta para que no quede en memoria
-        $respuesta->close();
+        $respuesta_nombre_data->close();
         // cierro conexion a la bd
         $this->db->close();
     }

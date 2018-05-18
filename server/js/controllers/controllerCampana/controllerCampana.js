@@ -63,28 +63,27 @@ $(document).ready(function(){
       function VerificarData(){
         $.get("controllers/controllerArbol/controllerGetCampanaData.php", function(datajson){
             var data = $.parseJSON(datajson);
+            // si existe data para la campana
             if(data.filas >= 1)
             {
-                
                 console.log(data);
                 $('#form_campana').show(2000);
-                $(".select_user_data").html(data.data[0]);
-                $('#btn_submit_campana').click(function(){
+                $(".div_user_data").html(data.data[0]);
+                // $('#btn_submit_campana').click(function(){
                     
-                    var nombre_campana = $('#campana_name');
-                    var select_data = $('#id_user_data option:selected').text();
-                    if(nombre_campana.val() != '' && select_data != '')
-                    {
-                        $( "#form_campana" ).submit();
-                        $('#ivr_arbol').show(2000);
+                //     var nombre_campana = $('#campana_name');
+                //     var select_data = $('#id_user_data option:selected').text();
+                //     if(nombre_campana.val() != '' && select_data != '')
+                //     {
+                //         $( "#form_campana" ).submit();
+                //         // $('#ivr_arbol').show(2000);
                         
-                    }
-                    else
-                    {
-                        $('#mensaje_campanas').fadeIn(6000).html('<div class="alert alert-danger">Complete todo el formulario para la Campaña</div>').delay(3000).fadeOut(3000);
-                    }
-                });
-                $('.selectpicker').selectpicker('deselectAll');
+                //     }
+                //     else
+                //     {
+                //         $('#mensaje_campanas').fadeIn(6000).html('<div class="alert alert-danger">Complete todo el formulario para la Campaña</div>').delay(3000).fadeOut(3000);
+                //     }
+                // });
             }
             else
             {
@@ -96,36 +95,45 @@ $(document).ready(function(){
         });
       }
 
-      //crear la campaña
-    $('#form_campana').on('submit', function(event){
-        event.preventDefault();  
-        $('#btn_submit_campana').attr('disabled','disabled');
-        var campana_data = $(this).serialize();
-        console.log(campana_data);return;
-        $.ajax({
-              url:"controllers/controllerCampana/controllerCampana.php",
-              method:"POST",  
-              data:new FormData(this),
-              contentType:false,  
-              processData:false,  
-              success:function(data){  
-                //   $('#result').html(data).show(2000).delay(3000).hide(5000);
-                  $('#result').html(data);
-                  $('#form_campana').show(2000);
-                  $('#file_crear_campana').val('');
-                  $('#btn_submit_campana').attr('disabled', false);
-                  userdataTable.ajax.reload();
-                  VerificarData();
-              }
-        });
-    });
-
+      // inicializo los selectpickers
       
-
       $('.selectpicker').selectpicker({
         language: 'ES',
         deselectAllText: 'Deselect All'
       });
+
+      //crear la campaña cualquier user para el arbol
+    $('#form_campana').on('submit', function(event){
+        event.preventDefault();
+        $('#btn_submit_campana').attr('disabled','disabled');
+        //obtengo el id del option seleccionado
+        var option_user_data_id = $('#select_user_data option:selected').attr('id');
+        //concateno el id del option seleccionado a la data del form
+        var campana_data = $(this).serialize()+'&option_user_id='+option_user_data_id;
+        $.ajax({
+              url:"controllers/controllerArbol/controllerInsertCampana.php",
+              method:"POST",
+              data:campana_data,
+              success:function(data){
+              var data_formateada = $.parseJSON(data);
+                if(data_formateada.mensaje == 'ok')
+                {
+                    $('#mensaje_campanas').fadeIn(1000).html('<div class="alert alert-success">Campaña creada</div>').delay(3000).fadeOut(3000);
+                    //muestro el siguiente form del arbol
+                    $('#ivr_arbol').show(2000);
+                    $('#campana_name').val('');
+                    $('#select_user_data').selectpicker('deselectAll');
+                    $('#btn_submit_campana').attr('disabled', false);
+                    userdataTable.ajax.reload();
+                }
+                else
+                {
+                    $('#btn_submit_campana').attr('disabled', false);
+                    $('#mensaje_campanas').fadeIn(3000).html('<div class="alert alert-danger">'+data_formateada.mensaje+'</div>').delay(3000).fadeOut(3000);
+                }
+              }
+        });
+    });
 
 
     //subir data para una campaña como user o master
