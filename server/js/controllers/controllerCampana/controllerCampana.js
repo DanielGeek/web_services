@@ -55,8 +55,12 @@ $(document).ready(function(){
           });
       }
 
-      
-      
+      // inicializo los selectpickers
+      $('.selectpicker').selectpicker({
+        language: 'ES',
+        deselectAllText: 'Deselect All'
+      });
+
       //verifica si existe data de algun excel para crear campañas
       $('#ivr_arbol').hide(2000);
       VerificarData();
@@ -70,21 +74,8 @@ $(document).ready(function(){
                 $('#form_campana').show(2000);
                 $(".div_user_data").html(data.data[0]);
                 $('#ivr_arbol').show(1000);
-                // $('#btn_submit_campana').click(function(){
-                    
-                //     var nombre_campana = $('#campana_name');
-                //     var select_data = $('#id_user_data option:selected').text();
-                //     if(nombre_campana.val() != '' && select_data != '')
-                //     {
-                //         $( "#form_campana" ).submit();
-                //         // $('#ivr_arbol').show(2000);
-                        
-                //     }
-                //     else
-                //     {
-                //         $('#mensaje_campanas').fadeIn(6000).html('<div class="alert alert-danger">Complete todo el formulario para la Campaña</div>').delay(3000).fadeOut(3000);
-                //     }
-                // });
+                //funcion para ver los campos del saludo
+                selectSaludo();
             }
             else
             {
@@ -96,12 +87,42 @@ $(document).ready(function(){
         });
       }
 
-      // inicializo los selectpickers
-      
-      $('.selectpicker').selectpicker({
-        language: 'ES',
-        deselectAllText: 'Deselect All'
-      });
+    //funcion para saber si se selecciono TTS, AUDIO o ninguno
+    function selectSaludo() {
+        $('#id_user_bot').on('change', function()
+        {
+            if((this).value == '')
+            {
+                // alert('nada seleccionado');
+                $('#saludo').attr('hidden', 'true');
+                $('#div-saludo-nombre').attr('hidden','true');
+                console.log((this).value);
+            }
+            else
+            {
+                // alert((this).value);
+                //muestro la columna saludo
+                $('#saludo').removeAttr('hidden');
+                //cuando cambie el input de saludo
+                $('#campana_saludo').on('change mouseenter mouseleave', function(){
+                    if($('#campana_saludo').val() != '')
+                    {
+                        $('#div-saludo-nombre').removeAttr('hidden');
+                    }
+                    else
+                    {
+                        $('#div-saludo-nombre').attr('hidden', 'true');
+                    }
+                })
+                
+                
+            }
+            console.log('funciona')
+        });
+    }
+     
+
+    
 
       //crear la campaña cualquier user para el arbol
     $('#form_campana').on('submit', function(event){

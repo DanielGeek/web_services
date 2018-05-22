@@ -164,16 +164,19 @@ class modelTree{
                                 </select>
                             </td>
                             <td>
-                                <div class="form-group col-md-">
+                                <div class="form-group" id="saludo" hidden>
                                     <input type="text" class="form-control" placeholder="Ingrese un texto: " name="campana_saludo" id="campana_saludo" required/>
                                 </div>
                             </td>
                             <td>
+                            <div id="div-saludo-nombre" hidden>
                                 <select name="id_user_nombre" id="id_user_nombre" class="form-control selectpicker" multiple data-max-options="1" required>
-                                        <option value='.$id.'>Luis</option>
-                                        <option value='.$id.'>Daniel</option>
-                                        <option value='.$id.'>Jessica</option>
+                                    <option value='.$id.'>Luis</option>
+                                    <option value='.$id.'>Daniel</option>
+                                    <option value='.$id.'>Jessica</option>
                                 </select>
+                            </div>
+                               
                             </td>
                             <td>
                             <button class="btn btn-danger btn-block" type="submit" name="button" id="btn_submit">
