@@ -26,7 +26,6 @@ $(document).ready(function(){
     // obtener id y nombre del creador campaña
     function getIDCreador(){
         $.get("controllers/controllerCampana/controllerGetIdCreador.php", function(data){
-          // si existe un json lo parseo
           if(data){
             $("#id_user").append(data);
           }
@@ -61,8 +60,9 @@ $(document).ready(function(){
         deselectAllText: 'Deselect All'
       });
 
-      //verifica si existe data de algun excel para crear campañas
+      //oculto la tabla del arbol
       $('#ivr_arbol').hide(2000);
+      //verifica si existe data de algun excel para crear campañas
       VerificarData();
       function VerificarData(){
         $.get("controllers/controllerArbol/controllerGetCampanaData.php", function(datajson){
@@ -71,10 +71,12 @@ $(document).ready(function(){
             if(data.filas >= 1)
             {
                 console.log(data);
+                //muestro el form para crear una campana
                 $('#form_campana').show(2000);
+                //agrego el select con las datas existentes
                 $(".div_user_data").html(data.data[0]);
                 $('#ivr_arbol').show(1000);
-                //funcion para ver los campos del saludo
+                //funcion para ver los campos del saludo para la primera fila
                 selectSaludo();
             }
             else
@@ -89,23 +91,26 @@ $(document).ready(function(){
 
     //funcion para saber si se selecciono TTS, AUDIO o ninguno
     function selectSaludo() {
+        //verifico el tipo de saludo seleccionado
         $('#id_user_bot').on('change', function()
         {
             if((this).value == '')
             {
                 // alert('nada seleccionado');
-                $('#saludo').attr('hidden', 'true');
+                $('#div-saludo').attr('hidden', 'true');
                 $('#div-saludo-nombre').attr('hidden','true');
+                $('#div-saludo-file').attr('hidden', 'true');
                 console.log((this).value);
             }
-            else
+            if((this).value == 'TTS')
             {
                 // alert((this).value);
                 //muestro la columna saludo
-                $('#saludo').removeAttr('hidden');
+                $('#div-saludo-file').attr('hidden', 'true');
+                $('#div-saludo').removeAttr('hidden');
                 //cuando cambie el input de saludo
-                $('#campana_saludo').on('change mouseenter mouseleave', function(){
-                    if($('#campana_saludo').val() != '')
+                $('#input_saludo').on('change mouseenter mouseleave', function(){
+                    if($('#input_saludo').val() != '')
                     {
                         $('#div-saludo-nombre').removeAttr('hidden');
                     }
@@ -117,7 +122,27 @@ $(document).ready(function(){
                 
                 
             }
-            console.log('funciona')
+            if((this).value == 'AUDIO')
+            {
+                // alert((this).value);
+                //muestro la columna saludo tipo file
+                $('#div-saludo-file').removeAttr('hidden');
+                $('#div-saludo').attr('hidden', 'true');
+
+                //cuando cambie el input de saludo file
+                $('#input_saludo_file').on('change mouseenter mouseleave', function(){
+                    if($('#input_saludo_file').val() != '')
+                    {
+                        $('#div-saludo-nombre').removeAttr('hidden');
+                    }
+                    else
+                    {
+                        $('#div-saludo-nombre').attr('hidden', 'true');
+                    }
+                })
+                
+                
+            }
         });
     }
      

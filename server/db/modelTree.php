@@ -164,8 +164,14 @@ class modelTree{
                                 </select>
                             </td>
                             <td>
-                                <div class="form-group" id="saludo" hidden>
-                                    <input type="text" class="form-control" placeholder="Ingrese un texto: " name="campana_saludo" id="campana_saludo" required/>
+                                <div class="form-group" id="div-saludo" hidden>
+                                    <input type="text" class="form-control" placeholder="Ingrese un texto: " name="input_saludo" id="input_saludo" required/>
+                                </div>
+
+                                <div class="form-group col-md-3" id="div-saludo-file" hidden>
+                                <label style="line-height: 0px;" class="btn btn-info btn-file">
+                                    Seleccione Data<input style="cursor:pointer;padding-top:10px; font-size:10px;" type="file" name="input_saludo_file" id="input_saludo_file" required/>
+                                </label>
                                 </div>
                             </td>
                             <td>
