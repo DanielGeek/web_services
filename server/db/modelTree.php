@@ -138,6 +138,7 @@ class modelTree{
                     <th>Saludo</th>
                     <th>Nombre</th>
                     <th></th>
+                    
                     ";  
         $query = "SELECT * FROM IVRC_arbol WHERE id_sub = 0";
         $rows = $this->db->query($query); 
@@ -152,7 +153,8 @@ class modelTree{
             // $espacios.$id
             $output .=   "<tr>
                               <td>".$espacios.$id."<i class='fa fa-folder-open'></i>";
-            if($id_sub == 0 && $tipo == 1)
+            // if($id_sub == 0 && $tipo == 1)
+            if( $tipo == 1)
             {
             $output .=      '
                             </td>
@@ -180,6 +182,58 @@ class modelTree{
                                     <option value='.$id.'>Luis</option>
                                     <option value='.$id.'>Daniel</option>
                                     <option value='.$id.'>Jessica</option>
+                                </select>
+                            </div>
+                               
+                            </td>
+                            <td>
+                            <button class="btn btn-danger btn-block" type="submit" name="button" id="btn_submit">
+                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Saltar
+                            </button>
+                            </td>
+                        </tr>';
+            }
+            if( $tipo == 2)
+            {
+            $output .=      '
+                            </td>
+                            <td>
+                            <label style="padding-top: 5px;
+                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">A</label>
+                                <select name="id_data_a" id="id_data_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                        <option value="15434708">15434708</option>
+                                        <option value="16693834">15434708</option>
+                                </select>
+                            </td>
+                            <td>
+                            <label style="padding-top: 5px;
+                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">B</label>
+                            <div id="div-data-b" >
+                                <select name="id_data_b" id="id_data_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <option value="Luis Ponce">Luis Ponce</option>
+                                    <option value="Joselin Rodriguez">Joselin Rodriguez</option>
+                                </select>
+                            </div>
+
+                            </td>
+                            <td>
+                            <label style="padding-top: 5px;
+                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">C</label>
+                            <div id="div-data-c" >
+                                <select name="id_data_c" id="id_data_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <option value="946922776">946922776</option>
+                                    <option value="965618955">965618955</option>
+                                </select>
+                            </div>
+                               
+                            </td>
+                            <td>
+                            <label style="padding-top: 5px;
+                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">D</label>
+                            <div id="div-data-d" >
+                                <select name="id_data_d" id="id_data_d" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <option value="200000">200000</option>
+                                    <option value="150000">150000</option>
                                 </select>
                             </div>
                                
