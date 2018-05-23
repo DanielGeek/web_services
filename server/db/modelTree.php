@@ -141,7 +141,7 @@ class modelTree{
                     
                     ";  
         $query = "SELECT * FROM IVRC_arbol WHERE id_sub = 0";
-        $rows = $this->db->query($query); 
+        $rows = $this->db->query($query);
         foreach($rows as $row){
             $id =  $row['id'];
             $espacios = $row['espacios'];
@@ -156,6 +156,27 @@ class modelTree{
             // if($id_sub == 0 && $tipo == 1)
             if( $tipo == 1)
             {
+            $query_tabla = "SELECT `COLUMN_NAME` 
+                            FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+                            WHERE `TABLE_SCHEMA`='webservice_db' 
+                            AND `TABLE_NAME`='IVRC_campana_data' ";
+            $filas = $this->db->query($query_tabla);
+            
+            /* array numérico */
+            $total_filas = array();
+            
+            $options = '';
+            for ($i = 0; $i < $filas->num_rows; $i++){
+                $total_filas[] = $filas->fetch_array(MYSQLI_NUM);
+                $filas_i = count($total_filas[$i]); 
+                for ($y = 0; $y < $filas_i; $y++){
+                      
+                      $campo = $total_filas[$i][$y];
+                      $options .= '<option value='.$campo.'>'.$campo.'</option>';
+                    }
+               
+                }
+           
             $output .=      '
                             </td>
                             <td>
@@ -179,9 +200,7 @@ class modelTree{
                             <td>
                             <div id="div-saludo-nombre" hidden>
                                 <select name="id_user_nombre" id="id_user_nombre" class="form-control selectpicker" multiple data-max-options="1" required>
-                                    <option value='.$id.'>Luis</option>
-                                    <option value='.$id.'>Daniel</option>
-                                    <option value='.$id.'>Jessica</option>
+                                    '.$options.'
                                 </select>
                             </div>
                                
@@ -193,7 +212,7 @@ class modelTree{
                             </td>
                         </tr>';
             }
-            if( $tipo == 2)
+            if( $tipo == 0)
             {
             $output .=      '
                             </td>
