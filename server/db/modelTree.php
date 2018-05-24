@@ -291,7 +291,7 @@ class modelTree{
 
                             <td>
                             <div id="div-row-2-d" >
-                                <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d">
+                                <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d" data-toggle="modal" data-target="#modalFrases">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -347,7 +347,7 @@ class modelTree{
 
                             <td>
                             <div id="div-row-3-d" >
-                                <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d">
+                                <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d" data-toggle="modal" data-target="#modalFrases">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -478,7 +478,7 @@ class modelTree{
 
                                     <td>
                                     <div id="div-row-2-d" >
-                                        <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d">
+                                        <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d" data-toggle="modal" data-target="#modalFrases">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -533,7 +533,7 @@ class modelTree{
     
                                 <td>
                                 <div id="div-row-3-d" >
-                                    <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d">
+                                    <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d" data-toggle="modal" data-target="#modalFrases">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>

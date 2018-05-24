@@ -40,5 +40,9 @@
 
                 </div>
                 
+                <?php
+                // Modal para insertar mas frases positivas y negativas
+                    include "modal_frases.php";
+                ?>
                  <!-- fin form correo -->
 <!-- Row End -->
