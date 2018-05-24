@@ -125,7 +125,50 @@ class modelTree{
         // cierro conexion a la bd
         $this->db->close();
     }
+    public function frasesNegativas()
+    {
+        $query = "SELECT * FROM frases_negativas";
+        $results = $this->db->query($query);
+        $total_filas = $results->num_rows;
+        $output = '';
+        if($total_filas)
+        {
+            foreach($results as $result)
+            {
+                $output .= '<option id='.$result['1'].' value='.$result['frase_negativa'].'>'.$result['frase_negativa'].'</option>';
+            }
+        }
+        else
+        {
+            $output .= '<option value="error">No existen datos</option>';
+        }
+        $results->close();
+        
+        return $output;
+        
+    }
+    public function frasesPositivas()
+    {
+        $query = "SELECT * FROM frases_positivas";
+        $results = $this->db->query($query);
+        $total_filas = $results->num_rows;
+        $output = '';
+        if($total_filas)
+        {
+            foreach($results as $result)
+            {
+                $output .= '<option id='.$result['1'].' value='.$result['frase_positiva'].'>'.$result['frase_positiva'].'</option>';
+            }
+        }
+        else
+        {
+            $output .= '<option value="error">No existen datos</option>';
+        }
+        $results->close();
+        return $output;
 
+    }
+    
     //obtener ids ordenados de la campana
     public function getTree()
     {  
@@ -226,15 +269,15 @@ class modelTree{
                                         <option value="dialpad">dialpad</option>
                                 </select>
                             </td>
-                            <td>
                             
+                            <td>
                             <div id="div-row-2-b" >
-                                <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                    <option value="positiva">positiva</option>
-                                </select>
+                                <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple required>'
+                                .$this->frasesPositivas().
+                                '</select>
                             </div>
-
                             </td>
+
                             <td>
                             
                             <div id="div-row-2-c" >
@@ -285,8 +328,8 @@ class modelTree{
                             <td>
                             
                             <div id="div-row-3-b" >
-                                <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                    <option value="negativa">negativa</option>
+                                <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple required>
+                                    '.$this->frasesNegativas().'
                                 </select>
                             </div>
 
@@ -416,8 +459,8 @@ class modelTree{
                                     <td>
                                     
                                     <div id="div-row-2-b" >
-                                        <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                            <option value="positiva">positiva</option>
+                                        <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple required>
+                                           '.$this->frasesPositivas().'
                                         </select>
                                     </div>
 
@@ -471,8 +514,8 @@ class modelTree{
                                 <td>
                                 
                                 <div id="div-row-3-b" >
-                                    <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                        <option value="negativa">negativa</option>
+                                    <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple required>
+                                        '.$this->frasesNegativas().'
                                     </select>
                                 </div>
     
