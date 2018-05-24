@@ -92,7 +92,7 @@ $(document).ready(function(){
     //funcion para saber si se selecciono TTS, AUDIO o ninguno
     function selectSaludo() {
         //verifico el tipo de saludo seleccionado
-        $('#id_user_bot').on('change', function()
+        $('.id_user_bot').on('change', function()
         {
             if((this).value == '')
             {

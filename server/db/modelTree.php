@@ -142,7 +142,9 @@ class modelTree{
                     ";  
         $query = "SELECT * FROM IVRC_arbol WHERE id_sub = 0";
         $rows = $this->db->query($query);
+        $contador = 0;
         foreach($rows as $row){
+            
             $id =  $row['id'];
             $espacios = $row['espacios'];
             $id_sub = $row['id_sub'];
@@ -156,6 +158,7 @@ class modelTree{
             // if($id_sub == 0 && $tipo == 1)
             if( $tipo == 1)
             {
+            $contador++;
             $query_tabla = "SELECT `COLUMN_NAME` 
                             FROM `INFORMATION_SCHEMA`.`COLUMNS` 
                             WHERE `TABLE_SCHEMA`='webservice_db' 
@@ -181,7 +184,7 @@ class modelTree{
                             </td>
                             <td>
                                 
-                                <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker id_user_bot" multiple multiple data-max-options="1" required>
                                         <option value="TTS">TTS</option>
                                         <option value="AUDIO">AUDIO</option>
                                 </select>
@@ -212,63 +215,68 @@ class modelTree{
                             </td>
                         </tr>';
             }
-            if( $tipo == 0)
+            if( $tipo == 2)
             {
+            $contador++;
             $output .=      '
                             </td>
                             <td>
-                            <label style="padding-top: 5px;
-                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">A</label>
-                                <select name="id_data_a" id="id_data_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                        <option value="15434708">15434708</option>
-                                        <option value="16693834">15434708</option>
+                                <select name="row_2_a" id="row_2_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                        <option value="speech">speech</option>
+                                        <option value="dialpad">dialpad</option>
                                 </select>
                             </td>
                             <td>
-                            <label style="padding-top: 5px;
-                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">B</label>
-                            <div id="div-data-b" >
-                                <select name="id_data_b" id="id_data_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                    <option value="Luis Ponce">Luis Ponce</option>
-                                    <option value="Joselin Rodriguez">Joselin Rodriguez</option>
+                            
+                            <div id="div-row-2-b" >
+                                <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <option value="positiva">positiva</option>
                                 </select>
                             </div>
 
                             </td>
                             <td>
-                            <label style="padding-top: 5px;
-                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">C</label>
-                            <div id="div-data-c" >
-                                <select name="id_data_c" id="id_data_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                    <option value="946922776">946922776</option>
-                                    <option value="965618955">965618955</option>
+                            
+                            <div id="div-row-2-c" >
+                                <select name="row_2_c" id="row_2_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <option value="si">si</option>
+                                    <option value="no">no</option>
                                 </select>
                             </div>
                                
                             </td>
+
                             <td>
-                            <label style="padding-top: 5px;
-                            padding-bottom: 5px; margin-bottom: 5px;" class="alert alert-danger">D</label>
-                            <div id="div-data-d" >
-                                <select name="id_data_d" id="id_data_d" class="form-control selectpicker" multiple multiple data-max-options="1" required>
-                                    <option value="200000">200000</option>
-                                    <option value="150000">150000</option>
-                                </select>
+                            <div id="div-row-2-d" >
+                                <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
                             </div>
-                               
                             </td>
+
                             <td>
-                            <button class="btn btn-danger btn-block" type="submit" name="button" id="btn_submit">
-                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Saltar
-                            </button>
+                            <div id="div-row-2-e" >
+                                <button class="btn btn-success btn-block" name="row_2_e" id="row_2_e">
+                                    Rama
+                                </button>
+                            </div>
+                            </td>
+
+                            <td>
+                            <div id="div-row-2-f" >
+                                <button class="btn btn-danger btn-block" name="row_2_f" id="row_2_f">
+                                    Accion
+                                </button>
+                            </div>
                             </td>
                         </tr>';
             }
+
             // echo $espacios.$id."<br>";
             // $id_sub = $row['id_sub'];
             // en la primera iteracion y la segunda id_sub = 0 imprimo los id 1, 2 luego id = 2 y existe id_sub =2, comienza a seleccionar filas el metodo $this->N($queryN)
             $queryN = "SELECT * FROM IVRC_arbol WHERE id_sub = $id";
-            $output .= $this->N($queryN);
+            $output .= $this->N($queryN, $contador, $options);
         }
 
         $output .= "</table>";
@@ -287,11 +295,12 @@ class modelTree{
         return $EspaciosHtmlTotal;
     }
 
-    public function N($queryN){
+    public function N($queryN, $contadorN, $optionsN){
             $rowsN = $this->db->query($queryN);
             $output2 = '';
-
+            
             foreach($rowsN as $rowN){
+                $contadorN++;
                 $idN = $rowN['id'];
                 $espaciosN = $rowN['espacios'];
                 $id_subN = $rowN['id_sub'];
@@ -302,12 +311,159 @@ class modelTree{
                 // .$espaciosN.$idN
                 $output2 .=   "<tr>
                                     <td>".$espaciosN.$idN."<i class='fa fa-folder-open'></i>";
-                
+
+                if( $contadorN == 1)
+                {
+                $output2 .=      '
+                                    </td>
+                                    <td>
+                                        
+                                        <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker id_user_bot" multiple multiple data-max-options="1" required>
+                                                <option value="TTS">TTS</option>
+                                                <option value="AUDIO">AUDIO</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="form-group" id="div-saludo" hidden>
+                                            <input type="text" class="form-control" placeholder="Ingrese un texto: " name="input_saludo" id="input_saludo" required/>
+                                        </div>
+
+                                        <div class="form-group col-md-3" id="div-saludo-file" hidden>
+                                        <label style="line-height: 0px;" class="btn btn-info btn-file">
+                                            Seleccione Data<input style="cursor:pointer;padding-top:10px; font-size:10px;" type="file" name="input_saludo_file" id="input_saludo_file" required/>
+                                        </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    <div id="div-saludo-nombre" hidden>
+                                        <select name="id_user_nombre" id="id_user_nombre" class="form-control selectpicker" multiple data-max-options="1" required>
+                                            '.$optionsN.'
+                                        </select>
+                                    </div>
+                                    
+                                    </td>
+                                    <td>
+                                    <button class="btn btn-danger btn-block" type="submit" name="button" id="btn_submit">
+                                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Saltar
+                                    </button>
+                                    </td>
+                                </tr>';
+                }
+                if( $contadorN == 2)
+                {
+                $output2 .=      '
+                                    </td>
+                                    <td>
+                                        <select name="row_2_a" id="row_2_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                                <option value="speech">speech</option>
+                                                <option value="dialpad">dialpad</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                    
+                                    <div id="div-row-2-b" >
+                                        <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                            <option value="positiva">positiva</option>
+                                        </select>
+                                    </div>
+
+                                    </td>
+                                    <td>
+                                    
+                                    <div id="div-row-2-c" >
+                                        <select name="row_2_c" id="row_2_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                            <option value="si">si</option>
+                                            <option value="no">no</option>
+                                        </select>
+                                    </div>
+                                    
+                                    </td>
+
+                                    <td>
+                                    <div id="div-row-2-d" >
+                                        <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    </td>
+
+                                    <td>
+                                    <div id="div-row-2-e" >
+                                        <button class="btn btn-success btn-block" name="row_2_e" id="row_2_e">
+                                            Rama
+                                        </button>
+                                    </div>
+                                    </td>
+
+                                    <td>
+                                    <div id="div-row-2-f" >
+                                        <button class="btn btn-danger btn-block" name="row_2_f" id="row_2_f">
+                                            Accion
+                                        </button>
+                                    </div>
+                                    </td>
+                                </tr>';
+                }
+                if( $contadorN == 3)
+                {
+                $output2 .=      '
+                                </td>
+                                <td>
+                                    <select name="row_3_a" id="row_3_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                            <option value="speech">speech</option>
+                                            <option value="dialpad">dialpad</option>
+                                    </select>
+                                </td>
+                                <td>
+                                
+                                <div id="div-row-3-b" >
+                                    <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                        <option value="negativa">negativa</option>
+                                    </select>
+                                </div>
+    
+                                </td>
+                                <td>
+                                
+                                <div id="div-row-3-c" >
+                                    <select name="row_3_c" id="row_3_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                        <option value="si">si</option>
+                                        <option value="no">no</option>
+                                    </select>
+                                </div>
+                                    
+                                </td>
+    
+                                <td>
+                                <div id="div-row-3-d" >
+                                    <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                </td>
+    
+                                <td>
+                                <div id="div-row-3-e" >
+                                    <button class="btn btn-success btn-block" name="row_3_e" id="row_3_e">
+                                        Rama
+                                    </button>
+                                </div>
+                                </td>
+    
+                                <td>
+                                <div id="div-row-3-f" >
+                                    <button class="btn btn-danger btn-block" name="row_3_f" id="row_3_f">
+                                        Accion
+                                    </button>
+                                </div>';
+                }
+                if($contadorN == 4)
+                $contadorN = 0;
                 $output2 .=         "</td>
                                 </tr>";
                 // echo $espaciosN.$idN.'<br>';
                 $queryN2 = "SELECT * FROM IVRC_arbol WHERE id_sub = $idN";
-                $output2 .= $this->N($queryN2);
+                $output2 .= $this->N($queryN2, $contadorN, $optionsN);
                 
             }
             return $output2;
