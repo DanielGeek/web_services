@@ -271,6 +271,60 @@ class modelTree{
                             </td>
                         </tr>';
             }
+            if( $tipo == 3)
+            {
+            $contador++;
+            $output .=      '
+                            </td>
+                            <td>
+                                <select name="row_3_a" id="row_3_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                        <option value="speech">speech</option>
+                                        <option value="dialpad">dialpad</option>
+                                </select>
+                            </td>
+                            <td>
+                            
+                            <div id="div-row-3-b" >
+                                <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <option value="negativa">negativa</option>
+                                </select>
+                            </div>
+
+                            </td>
+                            <td>
+                            
+                            <div id="div-row-3-c" >
+                                <select name="row_3_c" id="row_3_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <option value="si">si</option>
+                                    <option value="no">no</option>
+                                </select>
+                            </div>
+                                
+                            </td>
+
+                            <td>
+                            <div id="div-row-3-d" >
+                                <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            </td>
+
+                            <td>
+                            <div id="div-row-3-e" >
+                                <button class="btn btn-success btn-block" name="row_3_e" id="row_3_e">
+                                    Rama
+                                </button>
+                            </div>
+                            </td>
+
+                            <td>
+                            <div id="div-row-3-f" >
+                                <button class="btn btn-danger btn-block" name="row_3_f" id="row_3_f">
+                                    Accion
+                                </button>
+                            </div>';
+            }
 
             // echo $espacios.$id."<br>";
             // $id_sub = $row['id_sub'];
