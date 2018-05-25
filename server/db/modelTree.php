@@ -13,6 +13,30 @@ class modelTree{
        $this->session = session_start();
     }
 
+    public function InsertFrasePos()
+    {
+        $frase = $_POST['frase_namePos'];
+        $query = '';
+        $output = array();
+        $mensaje = '';
+        if(isset($frase) && $frase != '')
+        {
+            $query = "insert into frases_positivas (frase_positiva) values ('".$frase."')";
+            $consulta = $this->db->query($query);
+
+            // si se inserto
+            if(isset($consulta) && $consulta > 0)
+            $mensaje = 'ok';
+            else
+            $mensaje = 'No se pudo guardar la frase';
+
+            $output = array(
+                "mensaje" => $mensaje
+            );
+            
+            return json_encode($output);
+        }
+    }
     public function InsertCampana()
     {
         $nombre_campana = $_POST['campana_name'];
@@ -135,7 +159,7 @@ class modelTree{
         {
             foreach($results as $result)
             {
-                $output .= '<option id='.$result['1'].' value='.$result['frase_negativa'].'>'.$result['frase_negativa'].'</option>';
+                $output .= '<option id='.$result['1'].' value='.$result['1'].'>'.$result['frase_negativa'].'</option>';
             }
         }
         else
@@ -157,7 +181,7 @@ class modelTree{
         {
             foreach($results as $result)
             {
-                $output .= '<option id='.$result['1'].' value='.$result['frase_positiva'].'>'.$result['frase_positiva'].'</option>';
+                $output .= '<option id='.$result['1'].' value='.$result['1'].'>'.$result['frase_positiva'].'</option>';
             }
         }
         else
@@ -227,7 +251,7 @@ class modelTree{
                             </td>
                             <td>
                                 
-                                <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker id_user_bot" multiple multiple data-max-options="1" required>
+                                <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker id_user_bot" multiple  data-max-options="1" required>
                                         <option value="TTS">TTS</option>
                                         <option value="AUDIO">AUDIO</option>
                                 </select>
@@ -264,15 +288,15 @@ class modelTree{
             $output .=      '
                             </td>
                             <td>
-                                <select name="row_2_a" id="row_2_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                <select name="row_2_a" id="row_2_a" class="form-control selectpicker" multiple  data-max-options="1" required>
                                         <option value="speech">speech</option>
                                         <option value="dialpad">dialpad</option>
                                 </select>
                             </td>
                             
                             <td>
-                            <div id="div-row-2-b" >
-                                <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple required>'
+                            <div id="div-row-2-b" class="div-row-2-b">
+                                <select name="row_2_b" id="row_2_b" class="form-control selectpicker row_2_b" multiple  required>'
                                 .$this->frasesPositivas().
                                 '</select>
                             </div>
@@ -281,7 +305,7 @@ class modelTree{
                             <td>
                             
                             <div id="div-row-2-c" >
-                                <select name="row_2_c" id="row_2_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                <select name="row_2_c" id="row_2_c" class="form-control selectpicker" multiple  data-max-options="1" required>
                                     <option value="si">si</option>
                                     <option value="no">no</option>
                                 </select>
@@ -291,7 +315,7 @@ class modelTree{
 
                             <td>
                             <div id="div-row-2-d" >
-                                <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d" data-toggle="modal" data-target="#modalFrases">
+                                <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d" data-toggle="modal" data-target="#modalFrasesPos">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -320,7 +344,7 @@ class modelTree{
             $output .=      '
                             </td>
                             <td>
-                                <select name="row_3_a" id="row_3_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                <select name="row_3_a" id="row_3_a" class="form-control selectpicker" multiple  data-max-options="1" required>
                                         <option value="speech">speech</option>
                                         <option value="dialpad">dialpad</option>
                                 </select>
@@ -328,7 +352,7 @@ class modelTree{
                             <td>
                             
                             <div id="div-row-3-b" >
-                                <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple required>
+                                <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple  required>
                                     '.$this->frasesNegativas().'
                                 </select>
                             </div>
@@ -337,7 +361,7 @@ class modelTree{
                             <td>
                             
                             <div id="div-row-3-c" >
-                                <select name="row_3_c" id="row_3_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                <select name="row_3_c" id="row_3_c" class="form-control selectpicker" multiple  data-max-options="1" required>
                                     <option value="si">si</option>
                                     <option value="no">no</option>
                                 </select>
@@ -415,7 +439,7 @@ class modelTree{
                                     </td>
                                     <td>
                                         
-                                        <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker id_user_bot" multiple multiple data-max-options="1" required>
+                                        <select name="id_user_bot" id="id_user_bot" class="form-control selectpicker id_user_bot" multiple  data-max-options="1" required>
                                                 <option value="TTS">TTS</option>
                                                 <option value="AUDIO">AUDIO</option>
                                         </select>
@@ -451,15 +475,15 @@ class modelTree{
                 $output2 .=      '
                                     </td>
                                     <td>
-                                        <select name="row_2_a" id="row_2_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                        <select name="row_2_a" id="row_2_a" class="form-control selectpicker" multiple  data-max-options="1" required>
                                                 <option value="speech">speech</option>
                                                 <option value="dialpad">dialpad</option>
                                         </select>
                                     </td>
                                     <td>
                                     
-                                    <div id="div-row-2-b" >
-                                        <select name="row_2_b" id="row_2_b" class="form-control selectpicker" multiple multiple required>
+                                    <div id="div-row-2-b" class="div-row-2-b" >
+                                        <select name="row_2_b" id="row_2_b" class="form-control selectpicker row_2_b" multiple  required>
                                            '.$this->frasesPositivas().'
                                         </select>
                                     </div>
@@ -468,7 +492,7 @@ class modelTree{
                                     <td>
                                     
                                     <div id="div-row-2-c" >
-                                        <select name="row_2_c" id="row_2_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                        <select name="row_2_c" id="row_2_c" class="form-control selectpicker" multiple  data-max-options="1" required>
                                             <option value="si">si</option>
                                             <option value="no">no</option>
                                         </select>
@@ -478,7 +502,7 @@ class modelTree{
 
                                     <td>
                                     <div id="div-row-2-d" >
-                                        <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d" data-toggle="modal" data-target="#modalFrases">
+                                        <button class="btn btn-primary btn-block" name="row_2_d" id="row_2_d" data-toggle="modal" data-target="#modalFrasesPos">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -506,7 +530,7 @@ class modelTree{
                 $output2 .=      '
                                 </td>
                                 <td>
-                                    <select name="row_3_a" id="row_3_a" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <select name="row_3_a" id="row_3_a" class="form-control selectpicker" multiple  data-max-options="1" required>
                                             <option value="speech">speech</option>
                                             <option value="dialpad">dialpad</option>
                                     </select>
@@ -514,7 +538,7 @@ class modelTree{
                                 <td>
                                 
                                 <div id="div-row-3-b" >
-                                    <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple multiple required>
+                                    <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple  required>
                                         '.$this->frasesNegativas().'
                                     </select>
                                 </div>
@@ -523,7 +547,7 @@ class modelTree{
                                 <td>
                                 
                                 <div id="div-row-3-c" >
-                                    <select name="row_3_c" id="row_3_c" class="form-control selectpicker" multiple multiple data-max-options="1" required>
+                                    <select name="row_3_c" id="row_3_c" class="form-control selectpicker" multiple  data-max-options="1" required>
                                         <option value="si">si</option>
                                         <option value="no">no</option>
                                     </select>

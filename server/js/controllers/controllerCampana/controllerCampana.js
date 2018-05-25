@@ -44,7 +44,6 @@ $(document).ready(function(){
           
           if(data){
               $("#ivr_arbol").html(data);
-              
           }
           else
           {
@@ -53,6 +52,45 @@ $(document).ready(function(){
           }
           });
       }
+
+      // Agregar frases positivas, cuando enviamos la data del formulario en el modal
+    $(document).on('submit', '#frasesPos_form', function(event){
+        event.preventDefault();
+        $('#actionPos').attr('disabled','disabled');
+        var form_data = $(this).serialize();
+        // var id_user = $('#id_user').val();
+        console.log(form_data);
+        
+        $.ajax({
+         url:"controllers/controllerArbol/controllerInsertFrasePos.php",
+         method:"POST",
+         data:form_data,
+         success:function(data)
+         {
+          dataparseada = $.parseJSON(data);
+          if(dataparseada.mensaje == 'ok')
+          {
+            //el formulario esta enlazado con el evento click en la clase .update, cambiamos los valores de los inputos luego de editar a Add
+            $('#btnPos_action').val('');
+            $('#actionPos').val('Add');
+            $('.modal-title-frasesPos').html("<i class='fa fa-plus'></i> Agregar Nueva Frase Positiva");
+            $('#frasesPos_form')[0].reset();
+            $('#modalFrasesPos').modal('hide');
+            $('#mensaje_frases').fadeIn(3000).html('<div class="alert alert-success">Frase Insertada Correctamente</div>').delay(3000).fadeOut(3000);
+            $('#actionPos').attr('disabled', false);
+            location.reload();
+            
+          }
+          else
+          {
+            $('#mensaje_frases').fadeIn(3000).html('<div class="alert alert-danger">'+dataparseada.mensaje+'</div>').delay(3000).fadeOut(3000);
+            $('#actionPos').attr('disabled', false);
+            $('#modalFrasesPos').modal('hide');
+          }
+
+         }
+        })
+       });
 
       // inicializo los selectpickers
       $('.selectpicker').selectpicker({

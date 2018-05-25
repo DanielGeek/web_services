@@ -4,6 +4,7 @@
 
           <div id="producto_contenedor" class=" table-responsive col-md-12 col-lg-12 card">
             <div id="mensaje_campanas" class="text-center"></div>
+            <div id="mensaje_frases" class="text-center"></div>
                     
                     <!-- inicio contenedor form crear campaña -->
                         <div class="card-body" style="padding-bottom:300px !important;">
@@ -27,8 +28,11 @@
                                     
                             </form>
                             <br>
+                            
                             <div id="ivr_arbol">
+                                
                             </div>
+                            
                         </div>
                         
                         <!-- inicio tabla IVRC_arbol -->
