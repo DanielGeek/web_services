@@ -53,7 +53,7 @@ $(document).ready(function(){
           });
       }
 
-      // Agregar frases positivas, cuando enviamos la data del formulario en el modal
+    // Agregar frases positivas, cuando enviamos la data del formulario en el modal
     $(document).on('submit', '#frasesPos_form', function(event){
         event.preventDefault();
         $('#actionPos').attr('disabled','disabled');
@@ -78,8 +78,7 @@ $(document).ready(function(){
             $('#modalFrasesPos').modal('hide');
             $('#mensaje_frases').fadeIn(3000).html('<div class="alert alert-success">Frase Insertada Correctamente</div>').delay(3000).fadeOut(3000);
             $('#actionPos').attr('disabled', false);
-            location.reload();
-            
+            resfreshArbol();
           }
           else
           {
@@ -92,11 +91,62 @@ $(document).ready(function(){
         })
        });
 
+       // Agregar frases negativas, cuando enviamos la data del formulario en el modal
+    $(document).on('submit', '#frasesNeg_form', function(event){
+        event.preventDefault();
+        $('#actionNeg').attr('disabled','disabled');
+        var form_data = $(this).serialize();
+        // var id_user = $('#id_user').val();
+        console.log(form_data);
+        
+        $.ajax({
+         url:"controllers/controllerArbol/controllerInsertFraseNeg.php",
+         method:"POST",
+         data:form_data,
+         success:function(data)
+         {
+          dataparseada = $.parseJSON(data);
+          if(dataparseada.mensaje == 'ok')
+          {
+            //el formulario esta enlazado con el evento click en la clase .update, cambiamos los valores de los inputos luego de editar a Add
+            $('#btnNeg_action').val('');
+            $('#actionNeg').val('Add');
+            $('.modal-title-frasesNeg').html("<i class='fa fa-plus'></i> Agregar Nueva Frase Negativa");
+            $('#frasesNeg_form')[0].reset();
+            $('#modalFrasesNeg').modal('hide');
+            $('#mensaje_frases').fadeIn(3000).html('<div class="alert alert-success">Frase Insertada Correctamente</div>').delay(3000).fadeOut(3000);
+            $('#actionNeg').attr('disabled', false);
+            resfreshArbol();
+          }
+          else
+          {
+            $('#mensaje_frases').fadeIn(3000).html('<div class="alert alert-danger">'+dataparseada.mensaje+'</div>').delay(3000).fadeOut(3000);
+            $('#actionNeg').attr('disabled', false);
+            $('#modalFrasesNeg').modal('hide');
+          }
+
+         }
+        })
+       });
+       //para actualizar selectpicker con los nuevos datos
+       function resfreshArbol() {
+        setTimeout(function(){
+            $.get("controllers/controllerArbol/controllerGetTree.php", function(data){
+                $("#ivr_arbol").html(data);
+                $('.selectpicker').selectpicker('show');
+
+            });
+        }, 1);
+       }
       // inicializo los selectpickers
-      $('.selectpicker').selectpicker({
-        language: 'ES',
-        deselectAllText: 'Deselect All'
-      });
+      iniciaSelects();
+      function iniciaSelects(){
+        $('.selectpicker').selectpicker({
+            language: 'ES',
+            deselectAllText: 'Deselect All'
+          });
+      }
+      
 
       //oculto la tabla del arbol
       $('#ivr_arbol').hide(2000);

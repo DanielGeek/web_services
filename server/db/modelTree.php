@@ -13,6 +13,31 @@ class modelTree{
        $this->session = session_start();
     }
 
+    public function InsertFraseNeg()
+    {
+        $frase = $_POST['frase_nameNeg'];
+        $query = '';
+        $output = array();
+        $mensaje = '';
+        if(isset($frase) && $frase != '')
+        {
+            $query = "insert into frases_negativas (frase_negativa) values ('".$frase."')";
+            $consulta = $this->db->query($query);
+
+            // si se inserto
+            if(isset($consulta) && $consulta > 0)
+            $mensaje = 'ok';
+            else
+            $mensaje = 'No se pudo guardar la frase';
+
+            $output = array(
+                "mensaje" => $mensaje
+            );
+            
+            return json_encode($output);
+        }
+    }
+
     public function InsertFrasePos()
     {
         $frase = $_POST['frase_namePos'];
@@ -352,7 +377,7 @@ class modelTree{
                             <td>
                             
                             <div id="div-row-3-b" >
-                                <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple  required>
+                                <select name="row_3_b" id="row_3_b" class="form-control selectpicker row_3_b" multiple  required>
                                     '.$this->frasesNegativas().'
                                 </select>
                             </div>
@@ -371,7 +396,7 @@ class modelTree{
 
                             <td>
                             <div id="div-row-3-d" >
-                                <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d" data-toggle="modal" data-target="#modalFrases">
+                                <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d" data-toggle="modal" data-target="#modalFrasesNeg">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -538,7 +563,7 @@ class modelTree{
                                 <td>
                                 
                                 <div id="div-row-3-b" >
-                                    <select name="row_3_b" id="row_3_b" class="form-control selectpicker" multiple  required>
+                                    <select name="row_3_b" id="row_3_b" class="form-control selectpicker row_3_b" multiple  required>
                                         '.$this->frasesNegativas().'
                                     </select>
                                 </div>
@@ -557,7 +582,7 @@ class modelTree{
     
                                 <td>
                                 <div id="div-row-3-d" >
-                                    <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d" data-toggle="modal" data-target="#modalFrases">
+                                    <button class="btn btn-primary btn-block" name="row_3_d" id="row_3_d" data-toggle="modal" data-target="#modalFrasesNeg">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
