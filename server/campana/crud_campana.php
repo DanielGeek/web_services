@@ -10,7 +10,7 @@
                              <h3 class="panel-title">Lista de Campañas</h3>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6" align="right">
-                             <button type="button" name="add2" id="add_button2" data-toggle="modal" data-target="#userModal2" class="btn btn-success btn-xs">Add</button>
+                             <!-- <button type="button" name="add2" id="add_button2" data-toggle="modal" data-target="#userModal2" class="btn btn-success btn-xs">Add</button> -->
                          </div>
                         </div>
                        

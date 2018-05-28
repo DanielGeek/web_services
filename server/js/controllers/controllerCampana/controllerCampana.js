@@ -132,6 +132,7 @@ $(document).ready(function(){
        function resfreshArbol() {
         setTimeout(function(){
             $.get("controllers/controllerArbol/controllerGetTree.php", function(data){
+                $('#form_campana').show(2000);
                 $("#ivr_arbol").html(data);
                 $('.selectpicker').selectpicker('show');
                 selectSaludo();
@@ -255,6 +256,9 @@ $(document).ready(function(){
                 {
                     $('#mensaje_campanas').fadeIn(1000).html('<div class="alert alert-success">Campaña creada</div>').delay(3000).fadeOut(3000);
                     //muestro el siguiente form del arbol
+                    // $('#form_campana').hide(3000);
+                    // $('#form_campana').show(4000);
+                    // resfreshArbol();
                     $('#ivr_arbol').show(2000);
                     $('#campana_name').val('');
                     $('#select_user_data').selectpicker('deselectAll');
@@ -288,6 +292,7 @@ $(document).ready(function(){
                   $('#file_crear_campana').val('');
                   $('#btn_submit').attr('disabled', false);
                   userdataTable.ajax.reload();
+                  resfreshArbol();
                   VerificarData();
               }
         });
