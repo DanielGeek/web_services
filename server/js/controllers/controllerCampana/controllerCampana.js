@@ -134,7 +134,7 @@ $(document).ready(function(){
             $.get("controllers/controllerArbol/controllerGetTree.php", function(data){
                 $("#ivr_arbol").html(data);
                 $('.selectpicker').selectpicker('show');
-
+                selectSaludo();
             });
         }, 1);
        }
