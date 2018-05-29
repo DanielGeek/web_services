@@ -1,5 +1,6 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "webservice_db");
+$connect = mysqli_connect("localhost", "root", "m9a7r5s3", "webservice_db");
+// $connect = mysqli_connect("localhost", "root", "", "webservice_db");
 $sql = "SELECT * FROM frases_positivas";  
 $result = mysqli_query($connect, $sql);
 ?>
