@@ -1,7 +1,7 @@
 <?php  
 //export.php  
 $connect = mysqli_connect("localhost", "root", "m9a7r5s3", "webservice_db");
-$connect = mysqli_connect("localhost", "root", "", "webservice_db");
+// $connect = mysqli_connect("localhost", "root", "", "webservice_db");
 $output = '';
 if(isset($_POST["export"]))
 {
