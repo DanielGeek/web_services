@@ -43,7 +43,7 @@ if(isset($_POST["export"]))
   }
   $output .= '</table>';
   header('Content-Type: application/xls');
-  header('Content-Disposition: attachment; filename=download.xls');
+  header('Content-Disposition: attachment; filename=registros.xls');
   echo $output;
  }
 }
